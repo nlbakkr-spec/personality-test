@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personality Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: 8px;
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+        
+        .line {
+            width: 60px;
+            height: 1px;
+            background: #fff;
+            margin: 30px auto;
+        }
+        
+        h1 {
+            font-size: 28px;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 50px;
+        }
+        
+        .question {
+            display: none;
+        }
+        
+        .question.active {
+            display: block;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .option {
+            padding: 20px 25px;
+            border: 1px solid #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 15px;
+        }
+        
+        .option:hover {
+            border-color: #fff;
+            background: #111;
+        }
+        
+        .progress {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #333;
+            font-size: 12px;
+            letter-spacing: 3px;
+        }
+        
+        .result {
+            display: none;
+            text-align: center;
+        }
+        
+        .result.show {
+            display: block;
+        }
+        
+        .result-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+        
+        .result-desc {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        
+        .result-type {
+            font-size: 48px;
+            margin-bottom: 10px;
+            letter-spacing: 5px;
+        }
+        
+        .gate {
+            display: none;
+            text-align: center;
+        }
+        
+        .gate.show {
+            display: block;
+        }
+        
+        .gate-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .gate-text {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .ref-link {
+            display: inline-block;
+            padding: 15px 30px;
+            border: 1px solid #fff;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+        
+        .ref-link:hover {
+            background: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">PERSONALITY</div>
+        
+        <div class="line"></div>
+        
+        <!-- Start Screen -->
+        <div id="start" class="question active">
+            <h1>УЗНАЙ<br>СЕБЯ</h1>
+            <p class="subtitle">7 вопросов. 2 минуты.</p>
+            <div class="options">
+                <div class="option" onclick="startTest()">НАЧАТЬ</div>
+            </div>
+        </div>
+        
+        <!-- Questions -->
+        <div id="q1" class="question">
+            <p class="question-text">Как ты принимаешь решения?</p>
+            <div class="options">
+                <div class="option" onclick="answer(1, 'a')">Анализирую все за и против</div>
+                <div class="option" onclick="answer(1, 'b')">Доверяю интуиции</div>
+                <div class="option" onclick="answer(1, 'c')">Советуюсь с другими</div>
+                <div class="option" onclick="answer(1, 'd')">Действую быстро, потом думаю</div>
+            </div>
+        </div>
+        
+        <div id="q2" class="question">
+            <p class="question-text">Что для тебя важнее?</p>
+            <div class="options">
+                <div class="option" onclick="answer(2, 'a')">Успех и достижения</div>
+                <div class="option" onclick="answer(2, 'b')">Свобода и независимость</div>
+                <div class="option" onclick="answer(2, 'c')">Отношения и близость</div>
+                <div class="option" onclick="answer(2, 'd')">Стабильность и порядок</div>
+            </div>
+        </div>
+        
+        <div id="q3" class="question">
+            <p class="question-text">Как ты ведёшь себя в конфликте?</p>
+            <div class="options">
+                <div class="option" onclick="answer(3, 'a')">Ищу компромисс</div>
+                <div class="option" onclick="answer(3, 'b')">Отстаиваю свою позицию</div>
+                <div class="option" onclick="answer(3, 'c')">Избегаю конфликта</div>
+                <div class="option" onclick="answer(3, 'd')">Анализирую ситуацию</div>
+            </div>
+        </div>
+        
+        <div id="q4" class="question">
+            <p class="question-text">Что тебя мотивирует?</p>
+            <div class="options">
+                <div class="option" onclick="answer(4, 'a')">Признание и уважение</div>
+                <div class="option" onclick="answer(4, 'b')">Новые знания и опыт</div>
+                <div class="option" onclick="answer(4, 'c')">Помощь другим</div>
+                <div class="option" onclick="answer(4, 'd')">Материальный результат</div>
+            </div>
+        </div>
+        
+        <div id="q5" class="question">
+            <p class="question-text">Как ты относишься к правилам?</p>
+            <div class="options">
+                <div class="option" onclick="answer(5, 'a')">Следую им</div>
+                <div class="option" onclick="answer(5, 'b')">Ставлю под сомнение</div>
+                <div class="option" onclick="answer(5, 'c')">Создаю свои</div>
+                <div class="option" onclick="answer(5, 'd')">Игнорирую</div>
+            </div>
+        </div>
+        
+        <div id="q6" class="question">
+            <p class="question-text">Твоя идеальная работа?</p>
+            <div class="options">
+                <div class="option" onclick="answer(6, 'a')">Команда и коммуникации</div>
+                <div class="option" onclick="answer(6, 'b')">Творчество и свобода</div>
+                <div class="option" onclick="answer(6, 'c')">Анализ и структура</div>
+                <div class="option" onclick="answer(6, 'd')">Помощь людям</div>
+            </div>
+        </div>
+        
+        <div id="q7" class="question">
+            <p class="question-text">Что ты ценишь в людях?</p>
+            <div class="options">
+                <div class="option" onclick="answer(7, 'a')">Честность</div>
+                <div class="option" onclick="answer(7, 'b')">Надёжность</div>
+                <div class="option" onclick="answer(7, 'c')">Энергичность</div>
+                <div class="option" onclick="answer(7, 'd')">Ум</div>
+            </div>
+        </div>
+        
+        <!-- Gate Screen -->
+        <div id="gate" class="gate">
+            <h1>ГОТОВО?</h1>
+            <p class="gate-text">Узнай свой результат.<br>Зарегистрируйся в Telegram.</p>
+            <a href="https://t.me/mira?start=ref_7030530967" class="ref-link" target="_blank">ПОЛУЧИТЬ РЕЗУЛЬТАТ</a>
+            <div class="line"></div>
+            <p style="color: #333; font-size: 12px;">или вернись позже</p>
+        </div>
+        
+        <!-- Result (Hidden) -->
+        <div id="result" class="result">
+            <p class="result-type" id="resultType"></p>
+            <p class="result-title" id="resultTitle"></p>
+            <p class="result-desc" id="resultDesc"></p>
+            <div class="line"></div>
+            <p style="color: #333; font-size: 12px; margin-top: 30px;">Поделись с друзьями</p>
+        </div>
+        
+        <div class="progress" id="progress"></div>
+    </div>
+    
+    <script>
+        let answers = {};
+        const totalQuestions = 7;
+        
+        function startTest() {
+            document.getElementById('start').classList.remove('active');
+            document.getElementById('q1').classList.add('active');
+            updateProgress(1);
+        }
+        
+        function answer(q, a) {
+            answers[q] = a;
+            document.getElementById('q' + q).classList.remove('active');
+            
+            if (q < totalQuestions) {
+                document.getElementById('q' + (q + 1)).classList.add('active');
+                updateProgress(q + 1);
+            } else {
+                showGate();
+            }
+        }
+        
+        function updateProgress(num) {
+            document.getElementById('progress').textContent = num + '/' + totalQuestions;
+        }
+        
+        function showGate() {
+            document.getElementById('gate').classList.add('show');
+            document.getElementById('progress').style.display = 'none';
+        }
+        
+        function showResult() {
+            const type = calculateResult();
+            const results = {
+                'leader': {
+                    title: 'ЛИДЕР',
+                    desc: 'Ты прирождённый лидер. Умеешь вдохновлять, принимать решения и вести за собой. Твоя сила — в уверенности и способности видеть цель.'
+                },
+                'creator': {
+                    title: 'СОЗДАТЕЛЬ',
+                    desc: 'Ты мыслишь нестандартно. Любишь экспериментировать и создавать новое. Твоя сила — в воображении и смелости идти против течения.'
+                },
+                'analyst': {
+                    title: 'АНАЛИТИК',
+                    desc: 'Ты видишь то, что другие не замечаешь. Любишь факты, логику и системный подход. Твоя сила — в способности находить решения.'
+                },
+                'diplomat': {
+                    title: 'ДИПЛОМАТ',
+                    desc: 'Ты строишь мосты между людьми. Умеешь слушать, понимать и находить компромиссы. Твоя сила — в эмпатии и коммуникации.'
+                }
+            };
+            
+            const r = results[type];
+            document.getElementById('resultType').textContent = type.toUpperCase();
+            document.getElementById('resultTitle').textContent = r.title;
+            document.getElementById('resultDesc').textContent = r.desc;
+            
+            document.getElementById('gate').classList.remove('show');
+            document.getElementById('result').classList.add('show');
+        }
+        
+        function calculateResult() {
+            const counts = { a: 0, b: 0, c: 0, d: 0 };
+            Object.values(answers).forEach(a => counts[a]++);
+            
+            const max = Math.max(...Object.values(counts));
+            const dominant = Object.keys(counts).find(k => counts[k] === max);
+            
+            const map = {
+                'a': 'leader',
+                'b': 'creator', 
+                'c': 'diplomat',
+                'd': 'analyst'
+            };
+            
+            return map[dominant];
+        }
+    </script>
+</body>
+</html>
