@@ -230,13 +230,8 @@
             const counts = {a: 0, b: 0, c: 0, d: 0};
             Object.values(answers).forEach(a => counts[a]++);
             const top = Object.entries(counts).sort((x, y) => y[1] - x[1])[0][0];
-            const slugs = {a: 'стратег', b: 'харизматик', c: 'новатор', d: 'лидер'};
-            const slug = slugs[top];
 
-            // Set CTA link with psychotype param so Mira knows what to show
-            const ctaLink = document.getElementById('cta-link');
-            ctaLink.href = 'https://t.me/mira?start=ref_7030530967_' + slug;
-
+            // Show mystery screen, CTA link is clean ref link
             document.getElementById('progress').style.display = 'none';
             document.getElementById('result').classList.add('show');
         }
