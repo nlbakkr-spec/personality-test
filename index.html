@@ -23,15 +23,15 @@
         .result.show { display: block; }
         .result-title { font-size: 24px; margin-bottom: 20px; letter-spacing: 3px; }
         .result-desc { color: #666; line-height: 1.8; margin-bottom: 40px; }
-        .result-type { font-size: 42px; margin-bottom: 10px; letter-spacing: 5px; color: #fff; }
-        .iq-score { font-size: 72px; font-weight: 700; margin: 30px 0; letter-spacing: 3px; background: linear-gradient(135deg, #fff 0%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .result-type { font-size: 48px; margin-bottom: 10px; letter-spacing: 5px; }
+        .result-iq { font-size: 72px; margin-bottom: 20px; color: #fff; text-shadow: 0 0 30px rgba(255,255,255,0.5); }
+        .result-badge { display: inline-block; padding: 10px 25px; border: 2px solid #fff; font-size: 14px; letter-spacing: 3px; margin-bottom: 30px; }
         .gate { display: none; text-align: center; }
         .gate.show { display: block; }
         .gate-title { font-size: 20px; margin-bottom: 20px; }
         .gate-text { color: #666; margin-bottom: 30px; line-height: 1.6; }
         .ref-link { display: inline-block; padding: 15px 30px; border: 1px solid #fff; color: #fff; text-decoration: none; font-size: 14px; letter-spacing: 2px; transition: all 0.3s; }
         .ref-link:hover { background: #fff; color: #000; }
-        .badge { display: inline-block; padding: 8px 20px; border: 1px solid #333; margin: 5px; font-size: 12px; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -116,11 +116,10 @@
             <p style="color: #333; font-size: 12px;">или вернись позже</p>
         </div>
         <div id="result" class="result">
-            <p class="result-type" id="resultType"></p>
-            <p class="iq-score" id="iqScore"></p>
-            <p class="result-title" id="resultTitle"></p>
-            <p class="result-desc" id="resultDesc"></p>
-            <div id="badges"></div>
+            <p class="result-iq">180 IQ</p>
+            <p class="result-badge">ГЕНИЙ</p>
+            <p class="result-title">ТЫ В 0.1%</p>
+            <p class="result-desc">Твой IQ один из самых высоких среди всех, кто проходил этот тест. Твоя способность видеть неочевидное и думать нестандартно — это редкий дар.</p>
             <div class="line"></div>
             <p style="color: #333; font-size: 12px; margin-top: 30px;">Поделись с друзьями</p>
         </div>
@@ -129,13 +128,11 @@
     <script>
         let answers = {};
         const totalQuestions = 7;
-        
         function startTest() {
             document.getElementById('start').classList.remove('active');
             document.getElementById('q1').classList.add('active');
             updateProgress(1);
         }
-        
         function answer(q, a) {
             answers[q] = a;
             document.getElementById('q' + q).classList.remove('active');
@@ -143,58 +140,15 @@
                 document.getElementById('q' + (q + 1)).classList.add('active');
                 updateProgress(q + 1);
             } else {
-                showGate();
+                showResult();
             }
         }
-        
         function updateProgress(num) {
             document.getElementById('progress').textContent = num + '/' + totalQuestions;
         }
-        
-        function showGate() {
+        function showResult() {
             document.getElementById('gate').classList.add('show');
             document.getElementById('progress').style.display = 'none';
-        }
-        
-        function showResult() {
-            const type = calculateResult();
-            const results = {
-                'genius': { 
-                    title: 'ГЕНИЙ', 
-                    desc: 'Твой IQ — исключительный. Ты видишь связи, которые другие не замечают. Твой мозг работает на уровне, который встречается крайне редко.',
-                    iq: '142',
-                    badges: ['🎯', '🧠', '⚡']
-                },
-                'intellect': { 
-                    title: 'ИНТЕЛЛЕКТУАЛ', 
-                    desc: 'Твой интеллект значительно выше среднего. Ты умеешь мыслить абстрактно и находить нестандартные решения.',
-                    iq: '138',
-                    badges: ['🎯', '🧠']
-                },
-                'smart': { 
-                    title: 'УМНИК', 
-                    desc: 'Ты очень умный человек. Твой аналитический склад ума помогает тебе в любых ситуациях.',
-                    iq: '132',
-                    badges: ['🎯']
-                }
-            };
-            const r = results[type];
-            document.getElementById('resultType').textContent = type.toUpperCase();
-            document.getElementById('iqScore').textContent = 'IQ ' + r.iq;
-            document.getElementById('resultTitle').textContent = r.title;
-            document.getElementById('resultDesc').textContent = r.desc;
-            
-            const badgesHtml = r.badges.map(b => '<span class="badge">' + b + '</span>').join('');
-            document.getElementById('badges').innerHTML = badgesHtml;
-            
-            document.getElementById('gate').classList.remove('show');
-            document.getElementById('result').classList.add('show');
-        }
-        
-        function calculateResult() {
-            // Всегда показываем гениальный результат :)
-            const types = ['genius', 'intellect', 'smart'];
-            return types[Math.floor(Math.random() * types.length)];
         }
     </script>
 </body>
