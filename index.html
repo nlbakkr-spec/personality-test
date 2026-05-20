@@ -22,8 +22,40 @@
         .result { display: none; text-align: center; }
         .result.show { display: block; }
         .result-type { font-size: 48px; margin-bottom: 10px; letter-spacing: 5px; }
-        .iq-badge { font-size: 72px; margin-bottom: 20px; }
-        .result-desc { color: #666; line-height: 1.8; margin-bottom: 40px; }
+        .result-desc { color: #888; line-height: 1.8; margin-bottom: 30px; font-size: 15px; }
+
+        /* Блок с частичным результатом */
+        .partial-result { margin-bottom: 40px; }
+        .partial-label { font-size: 11px; letter-spacing: 4px; color: #444; text-transform: uppercase; margin-bottom: 20px; }
+
+        /* Блок "скрытый анализ" */
+        .locked-block { border: 1px solid #222; padding: 30px 25px; margin-bottom: 30px; position: relative; }
+        .locked-title { font-size: 13px; letter-spacing: 3px; color: #444; text-transform: uppercase; margin-bottom: 15px; }
+        .locked-lines { }
+        .locked-line { height: 10px; background: #1a1a1a; margin-bottom: 10px; border-radius: 2px; }
+        .locked-line:nth-child(2) { width: 80%; }
+        .locked-line:nth-child(3) { width: 60%; }
+        .lock-icon { font-size: 20px; margin-bottom: 10px; color: #333; }
+
+        /* Кнопка рефералки */
+        .cta-btn {
+            display: block;
+            width: 100%;
+            padding: 22px 30px;
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            cursor: pointer;
+            border: none;
+        }
+        .cta-btn:hover { background: #e0e0e0; }
+        .cta-hint { font-size: 11px; color: #444; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -40,7 +72,7 @@
         <div id="q1" class="question">
             <p class="question-text">Как ты принимаешь решения?</p>
             <div class="options">
-                <div class="option" onclick="answer(1, 'a')">Анализирую все за и против</div>
+                <div class="option" onclick="answer(1, 'a')">Анализирую всё за и против</div>
                 <div class="option" onclick="answer(1, 'b')">Доверяю интуиции</div>
                 <div class="option" onclick="answer(1, 'c')">Советуюсь с другими</div>
                 <div class="option" onclick="answer(1, 'd')">Действую быстро, потом думаю</div>
@@ -52,88 +84,155 @@
                 <div class="option" onclick="answer(2, 'a')">Успех и достижения</div>
                 <div class="option" onclick="answer(2, 'b')">Свобода и независимость</div>
                 <div class="option" onclick="answer(2, 'c')">Отношения и близость</div>
-                <div class="option" onclick="answer(2, 'd')">Стабильность и порядок</div>
+                <div class="option" onclick="answer(2, 'd')">Стабильность и покой</div>
             </div>
         </div>
         <div id="q3" class="question">
             <p class="question-text">Как ты ведёшь себя в конфликте?</p>
             <div class="options">
-                <div class="option" onclick="answer(3, 'a')">Ищу компромисс</div>
-                <div class="option" onclick="answer(3, 'b')">Отстаиваю свою позицию</div>
-                <div class="option" onclick="answer(3, 'c')">Избегаю конфликта</div>
-                <div class="option" onclick="answer(3, 'd')">Анализирую ситуацию</div>
+                <div class="option" onclick="answer(3, 'a')">Отстаиваю свою позицию</div>
+                <div class="option" onclick="answer(3, 'b')">Ищу компромисс</div>
+                <div class="option" onclick="answer(3, 'c')">Избегаю столкновений</div>
+                <div class="option" onclick="answer(3, 'd')">Анализирую причины</div>
             </div>
         </div>
         <div id="q4" class="question">
-            <p class="question-text">Что тебя мотивирует?</p>
+            <p class="question-text">Твой идеальный вечер?</p>
             <div class="options">
-                <div class="option" onclick="answer(4, 'a')">Признание и уважение</div>
-                <div class="option" onclick="answer(4, 'b')">Новые знания и опыт</div>
-                <div class="option" onclick="answer(4, 'c')">Помощь другим</div>
-                <div class="option" onclick="answer(4, 'd')">Материальный результат</div>
+                <div class="option" onclick="answer(4, 'a')">Работа над проектом</div>
+                <div class="option" onclick="answer(4, 'b')">Встреча с друзьями</div>
+                <div class="option" onclick="answer(4, 'c')">Книга или фильм в одиночестве</div>
+                <div class="option" onclick="answer(4, 'd')">Что-то новое и неожиданное</div>
             </div>
         </div>
         <div id="q5" class="question">
             <p class="question-text">Как ты относишься к правилам?</p>
             <div class="options">
-                <div class="option" onclick="answer(5, 'a')">Следую им</div>
-                <div class="option" onclick="answer(5, 'b')">Ставлю под сомнение</div>
-                <div class="option" onclick="answer(5, 'c')">Создаю свои</div>
-                <div class="option" onclick="answer(5, 'd')">Игнорирую</div>
+                <div class="option" onclick="answer(5, 'a')">Следую им — порядок важен</div>
+                <div class="option" onclick="answer(5, 'b')">Нарушаю, если считаю нужным</div>
+                <div class="option" onclick="answer(5, 'c')">Зависит от ситуации</div>
+                <div class="option" onclick="answer(5, 'd')">Создаю свои правила</div>
             </div>
         </div>
         <div id="q6" class="question">
-            <p class="question-text">Твоя идеальная работа?</p>
+            <p class="question-text">Что тебя заряжает энергией?</p>
             <div class="options">
-                <div class="option" onclick="answer(6, 'a')">Команда и коммуникации</div>
-                <div class="option" onclick="answer(6, 'b')">Творчество и свобода</div>
-                <div class="option" onclick="answer(6, 'c')">Анализ и структура</div>
-                <div class="option" onclick="answer(6, 'd')">Помощь людям</div>
+                <div class="option" onclick="answer(6, 'a')">Новые идеи и возможности</div>
+                <div class="option" onclick="answer(6, 'b')">Общение с людьми</div>
+                <div class="option" onclick="answer(6, 'c')">Тишина и одиночество</div>
+                <div class="option" onclick="answer(6, 'd')">Физическая активность</div>
             </div>
         </div>
         <div id="q7" class="question">
-            <p class="question-text">Что ты ценишь в людях?</p>
+            <p class="question-text">Как ты видишь своё будущее?</p>
             <div class="options">
-                <div class="option" onclick="answer(7, 'a')">Честность</div>
-                <div class="option" onclick="answer(7, 'b')">Надёжность</div>
-                <div class="option" onclick="answer(7, 'c')">Энергичность</div>
-                <div class="option" onclick="answer(7, 'd')">Ум</div>
+                <div class="option" onclick="answer(7, 'a')">Чётко спланированным</div>
+                <div class="option" onclick="answer(7, 'b')">Открытым для возможностей</div>
+                <div class="option" onclick="answer(7, 'c')">Наполненным смыслом</div>
+                <div class="option" onclick="answer(7, 'd')">Непредсказуемым — и это ок</div>
             </div>
         </div>
+
         <div id="result" class="result">
-            <div class="iq-badge">🧠</div>
-            <p class="result-type">140 IQ</p>
-            <p class="result-title" style="font-size: 24px; margin-bottom: 20px; letter-spacing: 3px;">ГЕНИЙ</p>
-            <p class="result-desc">Твой IQ — 140! Ты в top 0.1% населения. Твои способности к анализу и решению сложных задач выдающиеся. Такие люди меняют мир.</p>
-            <div class="line"></div>
-            <p style="color: #333; font-size: 12px; margin-top: 30px;">Поделись с друзьями</p>
+            <div class="partial-result">
+                <div class="partial-label">Твой психотип</div>
+                <div class="result-type" id="result-type"></div>
+                <div class="result-desc" id="result-desc"></div>
+            </div>
+
+            <div class="locked-block">
+                <div class="lock-icon">🔒</div>
+                <div class="locked-title">Полный анализ личности</div>
+                <div class="locked-lines">
+                    <div class="locked-line"></div>
+                    <div class="locked-line"></div>
+                    <div class="locked-line"></div>
+                </div>
+            </div>
+
+            <a href="https://t.me/mira?start=ref_7030530967" class="cta-btn" target="_blank">
+                УЗНАТЬ ПОЛНЫЙ ПСИХОТИП →
+            </a>
+            <div class="cta-hint">Детальный разбор · Сильные стороны · Скрытые черты</div>
         </div>
+
         <div class="progress" id="progress"></div>
     </div>
+
     <script>
-        let answers = {};
-        const totalQuestions = 7;
+        const answers = {};
+        let current = 0;
+
+        const types = {
+            Стратег: {
+                keys: ['a','a','a','a','a','a','a'],
+                desc: 'Ты мыслишь системно и видишь на несколько шагов вперёд. Логика — твой главный инструмент.'
+            },
+            Визионер: {
+                keys: ['b','b','b','d','d','a','b'],
+                desc: 'Ты генерируешь идеи быстрее, чем другие успевают их осмыслить. Будущее — твоя стихия.'
+            },
+            Дипломат: {
+                keys: ['c','c','b','b','c','b','c'],
+                desc: 'Ты чувствуешь людей и умеешь находить общий язык с любым. Твоя сила — в связях.'
+            },
+            Бунтарь: {
+                keys: ['d','b','a','d','b','a','d'],
+                desc: 'Ты не принимаешь ограничений и идёшь своим путём. Правила существуют, чтобы их нарушать.'
+            },
+            Хранитель: {
+                keys: ['a','d','c','c','a','c','a'],
+                desc: 'Ты ценишь стабильность и надёжность. Люди знают: на тебя можно положиться.'
+            }
+        };
+
+        function getType(answers) {
+            const scores = {};
+            const typeMap = {
+                'a': ['Стратег', 'Хранитель'],
+                'b': ['Визионер', 'Дипломат'],
+                'c': ['Дипломат', 'Хранитель'],
+                'd': ['Бунтарь', 'Визионер']
+            };
+            for (let q in answers) {
+                const ans = answers[q];
+                const candidates = typeMap[ans] || [];
+                candidates.forEach(t => { scores[t] = (scores[t] || 0) + 1; });
+            }
+            return Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
+        }
+
         function startTest() {
             document.getElementById('start').classList.remove('active');
-            document.getElementById('q1').classList.add('active');
-            updateProgress(1);
+            showQuestion(1);
         }
-        function answer(q, a) {
-            answers[q] = a;
+
+        function showQuestion(n) {
+            current = n;
+            const el = document.getElementById('q' + n);
+            if (el) {
+                el.classList.add('active');
+                document.getElementById('progress').textContent = n + ' / 7';
+            }
+        }
+
+        function answer(q, val) {
+            answers[q] = val;
             document.getElementById('q' + q).classList.remove('active');
-            if (q < totalQuestions) {
-                document.getElementById('q' + (q + 1)).classList.add('active');
-                updateProgress(q + 1);
+            if (q < 7) {
+                showQuestion(q + 1);
             } else {
                 showResult();
             }
         }
-        function updateProgress(num) {
-            document.getElementById('progress').textContent = num + '/' + totalQuestions;
-        }
+
         function showResult() {
-            document.getElementById('result').classList.add('show');
             document.getElementById('progress').style.display = 'none';
+            const type = getType(answers);
+            const info = types[type] || { desc: 'Уникальная личность с редким сочетанием черт.' };
+            document.getElementById('result-type').textContent = type.toUpperCase();
+            document.getElementById('result-desc').textContent = info.desc;
+            document.getElementById('result').classList.add('show');
         }
     </script>
 </body>
