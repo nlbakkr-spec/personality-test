@@ -21,41 +21,58 @@
         .progress { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); color: #333; font-size: 12px; letter-spacing: 3px; }
         .result { display: none; text-align: center; }
         .result.show { display: block; }
-        .result-type { font-size: 48px; margin-bottom: 10px; letter-spacing: 5px; }
-        .result-desc { color: #888; line-height: 1.8; margin-bottom: 30px; font-size: 15px; }
+        .result-type { font-size: 42px; font-weight: 300; margin-bottom: 10px; letter-spacing: 5px; }
+        .result-preview { color: #aaa; line-height: 1.8; margin-bottom: 30px; font-size: 15px; }
 
-        /* Блок с частичным результатом */
-        .partial-result { margin-bottom: 40px; }
-        .partial-label { font-size: 11px; letter-spacing: 4px; color: #444; text-transform: uppercase; margin-bottom: 20px; }
+        /* Locked full result block */
+        .result-locked {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        .result-locked-text {
+            color: #555;
+            line-height: 1.8;
+            font-size: 14px;
+            filter: blur(4px);
+            user-select: none;
+            pointer-events: none;
+            margin-bottom: 0;
+        }
+        .result-locked-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom, transparent 0%, #0a0a0a 60%);
+        }
 
-        /* Блок "скрытый анализ" */
-        .locked-block { border: 1px solid #222; padding: 30px 25px; margin-bottom: 30px; position: relative; }
-        .locked-title { font-size: 13px; letter-spacing: 3px; color: #444; text-transform: uppercase; margin-bottom: 15px; }
-        .locked-lines { }
-        .locked-line { height: 10px; background: #1a1a1a; margin-bottom: 10px; border-radius: 2px; }
-        .locked-line:nth-child(2) { width: 80%; }
-        .locked-line:nth-child(3) { width: 60%; }
-        .lock-icon { font-size: 20px; margin-bottom: 10px; color: #333; }
-
-        /* Кнопка рефералки */
+        /* CTA button */
         .cta-btn {
-            display: block;
-            width: 100%;
-            padding: 22px 30px;
-            background: #fff;
-            color: #000;
+            display: inline-block;
+            padding: 20px 40px;
+            border: 1px solid #fff;
+            color: #fff;
             text-decoration: none;
             font-size: 13px;
             letter-spacing: 3px;
             text-transform: uppercase;
-            text-align: center;
             transition: all 0.3s ease;
-            margin-bottom: 15px;
+            margin-top: 10px;
             cursor: pointer;
-            border: none;
         }
-        .cta-btn:hover { background: #e0e0e0; }
-        .cta-hint { font-size: 11px; color: #444; letter-spacing: 1px; }
+        .cta-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+        .cta-hint {
+            color: #444;
+            font-size: 11px;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
@@ -72,7 +89,7 @@
         <div id="q1" class="question">
             <p class="question-text">Как ты принимаешь решения?</p>
             <div class="options">
-                <div class="option" onclick="answer(1, 'a')">Анализирую всё за и против</div>
+                <div class="option" onclick="answer(1, 'a')">Анализирую все за и против</div>
                 <div class="option" onclick="answer(1, 'b')">Доверяю интуиции</div>
                 <div class="option" onclick="answer(1, 'c')">Советуюсь с другими</div>
                 <div class="option" onclick="answer(1, 'd')">Действую быстро, потом думаю</div>
@@ -84,154 +101,132 @@
                 <div class="option" onclick="answer(2, 'a')">Успех и достижения</div>
                 <div class="option" onclick="answer(2, 'b')">Свобода и независимость</div>
                 <div class="option" onclick="answer(2, 'c')">Отношения и близость</div>
-                <div class="option" onclick="answer(2, 'd')">Стабильность и покой</div>
+                <div class="option" onclick="answer(2, 'd')">Стабильность и порядок</div>
             </div>
         </div>
         <div id="q3" class="question">
             <p class="question-text">Как ты ведёшь себя в конфликте?</p>
             <div class="options">
-                <div class="option" onclick="answer(3, 'a')">Отстаиваю свою позицию</div>
-                <div class="option" onclick="answer(3, 'b')">Ищу компромисс</div>
-                <div class="option" onclick="answer(3, 'c')">Избегаю столкновений</div>
-                <div class="option" onclick="answer(3, 'd')">Анализирую причины</div>
+                <div class="option" onclick="answer(3, 'a')">Ищу компромисс</div>
+                <div class="option" onclick="answer(3, 'b')">Отстаиваю свою позицию</div>
+                <div class="option" onclick="answer(3, 'c')">Избегаю конфликта</div>
+                <div class="option" onclick="answer(3, 'd')">Анализирую ситуацию</div>
             </div>
         </div>
         <div id="q4" class="question">
-            <p class="question-text">Твой идеальный вечер?</p>
+            <p class="question-text">Что тебя мотивирует?</p>
             <div class="options">
-                <div class="option" onclick="answer(4, 'a')">Работа над проектом</div>
-                <div class="option" onclick="answer(4, 'b')">Встреча с друзьями</div>
-                <div class="option" onclick="answer(4, 'c')">Книга или фильм в одиночестве</div>
-                <div class="option" onclick="answer(4, 'd')">Что-то новое и неожиданное</div>
+                <div class="option" onclick="answer(4, 'a')">Признание и уважение</div>
+                <div class="option" onclick="answer(4, 'b')">Новые знания и опыт</div>
+                <div class="option" onclick="answer(4, 'c')">Помощь другим</div>
+                <div class="option" onclick="answer(4, 'd')">Материальный результат</div>
             </div>
         </div>
         <div id="q5" class="question">
             <p class="question-text">Как ты относишься к правилам?</p>
             <div class="options">
-                <div class="option" onclick="answer(5, 'a')">Следую им — порядок важен</div>
-                <div class="option" onclick="answer(5, 'b')">Нарушаю, если считаю нужным</div>
-                <div class="option" onclick="answer(5, 'c')">Зависит от ситуации</div>
-                <div class="option" onclick="answer(5, 'd')">Создаю свои правила</div>
+                <div class="option" onclick="answer(5, 'a')">Следую им</div>
+                <div class="option" onclick="answer(5, 'b')">Ставлю под сомнение</div>
+                <div class="option" onclick="answer(5, 'c')">Создаю свои</div>
+                <div class="option" onclick="answer(5, 'd')">Игнорирую</div>
             </div>
         </div>
         <div id="q6" class="question">
-            <p class="question-text">Что тебя заряжает энергией?</p>
+            <p class="question-text">Твоя идеальная работа?</p>
             <div class="options">
-                <div class="option" onclick="answer(6, 'a')">Новые идеи и возможности</div>
-                <div class="option" onclick="answer(6, 'b')">Общение с людьми</div>
-                <div class="option" onclick="answer(6, 'c')">Тишина и одиночество</div>
-                <div class="option" onclick="answer(6, 'd')">Физическая активность</div>
+                <div class="option" onclick="answer(6, 'a')">Команда и коммуникации</div>
+                <div class="option" onclick="answer(6, 'b')">Творчество и свобода</div>
+                <div class="option" onclick="answer(6, 'c')">Анализ и структура</div>
+                <div class="option" onclick="answer(6, 'd')">Помощь людям</div>
             </div>
         </div>
         <div id="q7" class="question">
-            <p class="question-text">Как ты видишь своё будущее?</p>
+            <p class="question-text">Что ты ценишь в людях?</p>
             <div class="options">
-                <div class="option" onclick="answer(7, 'a')">Чётко спланированным</div>
-                <div class="option" onclick="answer(7, 'b')">Открытым для возможностей</div>
-                <div class="option" onclick="answer(7, 'c')">Наполненным смыслом</div>
-                <div class="option" onclick="answer(7, 'd')">Непредсказуемым — и это ок</div>
+                <div class="option" onclick="answer(7, 'a')">Честность</div>
+                <div class="option" onclick="answer(7, 'b')">Надёжность</div>
+                <div class="option" onclick="answer(7, 'c')">Энергичность</div>
+                <div class="option" onclick="answer(7, 'd')">Ум</div>
             </div>
         </div>
 
         <div id="result" class="result">
-            <div class="partial-result">
-                <div class="partial-label">Твой психотип</div>
-                <div class="result-type" id="result-type"></div>
-                <div class="result-desc" id="result-desc"></div>
-            </div>
+            <div class="line"></div>
+            <div id="result-type" class="result-type"></div>
+            <p id="result-preview" class="result-preview"></p>
 
-            <div class="locked-block">
-                <div class="lock-icon">🔒</div>
-                <div class="locked-title">Полный анализ личности</div>
-                <div class="locked-lines">
-                    <div class="locked-line"></div>
-                    <div class="locked-line"></div>
-                    <div class="locked-line"></div>
+            <div class="result-locked">
+                <p id="result-locked-text" class="result-locked-text"></p>
+                <div class="result-locked-overlay">
+                    <p style="color:#666; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:20px;">Полный анализ скрыт</p>
+                    <a id="cta-link" href="https://t.me/mira?start=ref_7030530967" target="_blank" class="cta-btn">
+                        🔓 Узнать полный психотип
+                    </a>
+                    <p class="cta-hint">Бесплатно · Через Telegram</p>
                 </div>
             </div>
-
-            <a href="https://t.me/mira?start=ref_7030530967" class="cta-btn" target="_blank">
-                УЗНАТЬ ПОЛНЫЙ ПСИХОТИП →
-            </a>
-            <div class="cta-hint">Детальный разбор · Сильные стороны · Скрытые черты</div>
         </div>
 
         <div class="progress" id="progress"></div>
     </div>
-
     <script>
-        const answers = {};
-        let current = 0;
-
         const types = {
-            Стратег: {
-                keys: ['a','a','a','a','a','a','a'],
-                desc: 'Ты мыслишь системно и видишь на несколько шагов вперёд. Логика — твой главный инструмент.'
+            a: {
+                name: "СТРАТЕГ",
+                preview: "Ты мыслишь системно и видишь картину целиком. Твои решения взвешены, а цели — долгосрочные.",
+                full: "Ты редкий тип личности — Стратег. Твой мозг работает как шахматный компьютер: просчитывает ходы наперёд, находит скрытые связи и строит планы там, где другие видят хаос. Ты не торопишься с выводами — и именно поэтому почти всегда оказываешься прав. Твоя слабость — перфекционизм и сложность в делегировании. Полный разбор твоих сильных сторон, скрытых талантов и зон роста — в персональном отчёте."
             },
-            Визионер: {
-                keys: ['b','b','b','d','d','a','b'],
-                desc: 'Ты генерируешь идеи быстрее, чем другие успевают их осмыслить. Будущее — твоя стихия.'
+            b: {
+                name: "ХАРИЗМАТИК",
+                preview: "Ты живёшь интуицией и энергией момента. Люди тянутся к тебе — ты умеешь зажигать.",
+                full: "Харизматик — это не просто обаяние. Это особый тип восприятия мира: ты чувствуешь людей и ситуации раньше, чем успеваешь их осмыслить. Твоя интуиция — мощный инструмент, который большинство людей никогда не разовьют. Ты создаёшь атмосферу вокруг себя и двигаешь других вперёд. Полный анализ твоего психотипа, включая скрытые мотивы и идеальные сферы реализации — в персональном отчёте."
             },
-            Дипломат: {
-                keys: ['c','c','b','b','c','b','c'],
-                desc: 'Ты чувствуешь людей и умеешь находить общий язык с любым. Твоя сила — в связях.'
+            c: {
+                name: "НОВАТОР",
+                preview: "Ты видишь возможности там, где другие видят препятствия. Твой мозг заточен под изменения.",
+                full: "Новатор — один из самых редких психотипов. Ты не просто генерируешь идеи — ты переосмысляешь правила игры. Твоя сила в нестандартном мышлении и способности адаптироваться быстрее других. Именно такие люди создают то, чего раньше не существовало. Полный разбор твоих уникальных черт, потенциала и слепых зон — в персональном отчёте."
             },
-            Бунтарь: {
-                keys: ['d','b','a','d','b','a','d'],
-                desc: 'Ты не принимаешь ограничений и идёшь своим путём. Правила существуют, чтобы их нарушать.'
-            },
-            Хранитель: {
-                keys: ['a','d','c','c','a','c','a'],
-                desc: 'Ты ценишь стабильность и надёжность. Люди знают: на тебя можно положиться.'
+            d: {
+                name: "ЛИДЕР",
+                preview: "Ты действуешь, пока другие думают. Твоя сила — в решительности и умении вести за собой.",
+                full: "Лидер по природе — это не должность, это способ существования. Ты берёшь ответственность там, где другие отступают, и двигаешься вперёд даже в условиях неопределённости. Твоя энергия заразительна, а результаты говорят сами за себя. Полный анализ твоего лидерского стиля, сильных сторон и точек роста — в персональном отчёте."
             }
         };
 
-        function getType(answers) {
-            const scores = {};
-            const typeMap = {
-                'a': ['Стратег', 'Хранитель'],
-                'b': ['Визионер', 'Дипломат'],
-                'c': ['Дипломат', 'Хранитель'],
-                'd': ['Бунтарь', 'Визионер']
-            };
-            for (let q in answers) {
-                const ans = answers[q];
-                const candidates = typeMap[ans] || [];
-                candidates.forEach(t => { scores[t] = (scores[t] || 0) + 1; });
-            }
-            return Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
-        }
+        let answers = {};
+        const totalQuestions = 7;
 
         function startTest() {
             document.getElementById('start').classList.remove('active');
-            showQuestion(1);
+            document.getElementById('q1').classList.add('active');
+            updateProgress(1);
         }
 
-        function showQuestion(n) {
-            current = n;
-            const el = document.getElementById('q' + n);
-            if (el) {
-                el.classList.add('active');
-                document.getElementById('progress').textContent = n + ' / 7';
-            }
-        }
-
-        function answer(q, val) {
-            answers[q] = val;
+        function answer(q, a) {
+            answers[q] = a;
             document.getElementById('q' + q).classList.remove('active');
-            if (q < 7) {
-                showQuestion(q + 1);
+            if (q < totalQuestions) {
+                document.getElementById('q' + (q + 1)).classList.add('active');
+                updateProgress(q + 1);
             } else {
                 showResult();
             }
         }
 
+        function updateProgress(num) {
+            document.getElementById('progress').textContent = num + '/' + totalQuestions;
+        }
+
         function showResult() {
+            const counts = {a: 0, b: 0, c: 0, d: 0};
+            Object.values(answers).forEach(a => counts[a]++);
+            const top = Object.entries(counts).sort((x, y) => y[1] - x[1])[0][0];
+            const r = types[top];
+
+            document.getElementById('result-type').textContent = r.name;
+            document.getElementById('result-preview').textContent = r.preview;
+            document.getElementById('result-locked-text').textContent = r.full;
             document.getElementById('progress').style.display = 'none';
-            const type = getType(answers);
-            const info = types[type] || { desc: 'Уникальная личность с редким сочетанием черт.' };
-            document.getElementById('result-type').textContent = type.toUpperCase();
-            document.getElementById('result-desc').textContent = info.desc;
             document.getElementById('result').classList.add('show');
         }
     </script>
