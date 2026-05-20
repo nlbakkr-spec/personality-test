@@ -166,9 +166,9 @@
             <p style="color:#444; font-size:13px; letter-spacing:2px; text-transform:uppercase; margin-bottom:35px;">Твой психотип определён</p>
 
             <div class="result-locked">
-                <p id="result-locked-text" class="result-locked-text">Твой психотип раскрывает скрытые черты характера, сильные стороны и зоны роста. Полный анализ включает описание твоих уникальных талантов, мотивации и идеальных сфер реализации.</p>
+                <p class="result-locked-text">Твой психотип раскрывает скрытые черты характера, сильные стороны и зоны роста. Полный анализ включает описание твоих уникальных талантов, мотивации и идеальных сфер реализации.</p>
                 <div class="result-locked-overlay">
-                    <a id="cta-link" href="https://t.me/mira?start=ref_7030530967" target="_blank" class="cta-btn">
+                    <a href="https://t.me/mira?start=ref_7030530967" target="_blank" class="cta-btn">
                         🔓 Узнать результат
                     </a>
                     <p class="cta-hint">Бесплатно · Через Telegram</p>
@@ -231,7 +231,6 @@
             Object.values(answers).forEach(a => counts[a]++);
             const top = Object.entries(counts).sort((x, y) => y[1] - x[1])[0][0];
 
-            // Show mystery screen, CTA link is clean ref link
             document.getElementById('progress').style.display = 'none';
             document.getElementById('result').classList.add('show');
         }
