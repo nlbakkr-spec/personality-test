@@ -25,12 +25,6 @@
         .result-desc { color: #666; line-height: 1.8; margin-bottom: 40px; }
         .result-type { font-size: 48px; margin-bottom: 10px; letter-spacing: 5px; }
         .iq-badge { font-size: 72px; margin-bottom: 20px; }
-        .gate { display: none; text-align: center; }
-        .gate.show { display: block; }
-        .gate-title { font-size: 20px; margin-bottom: 20px; }
-        .gate-text { color: #666; margin-bottom: 30px; line-height: 1.6; }
-        .ref-link { display: inline-block; padding: 15px 30px; border: 1px solid #fff; color: #fff; text-decoration: none; font-size: 14px; letter-spacing: 2px; transition: all 0.3s; }
-        .ref-link:hover { background: #fff; color: #000; }
     </style>
 </head>
 <body>
@@ -107,13 +101,6 @@
                 <div class="option" onclick="answer(7, 'd')">Ум</div>
             </div>
         </div>
-        <div id="gate" class="gate">
-            <h1>ГОТОВО?</h1>
-            <p class="gate-text">Узнай свой результат.<br>Зарегистрируйся в Telegram.</p>
-            <a href="https://t.me/mira?start=ref_7030530967" class="ref-link" target="_blank">ПОЛУЧИТЬ РЕЗУЛЬТАТ</a>
-            <div class="line"></div>
-            <p style="color: #333; font-size: 12px;">или вернись позже</p>
-        </div>
         <div id="result" class="result">
             <div class="iq-badge">🧠</div>
             <p class="result-type">140 IQ</p>
@@ -139,19 +126,15 @@
                 document.getElementById('q' + (q + 1)).classList.add('active');
                 updateProgress(q + 1);
             } else {
-                showGate();
+                showResult();
             }
         }
         function updateProgress(num) {
             document.getElementById('progress').textContent = num + '/' + totalQuestions;
         }
-        function showGate() {
-            document.getElementById('gate').classList.add('show');
-            document.getElementById('progress').style.display = 'none';
-        }
         function showResult() {
-            document.getElementById('gate').classList.remove('show');
             document.getElementById('result').classList.add('show');
+            document.getElementById('progress').style.display = 'none';
         }
     </script>
 </body>
