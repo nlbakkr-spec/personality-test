@@ -24,8 +24,7 @@
         .result-title { font-size: 24px; margin-bottom: 20px; letter-spacing: 3px; }
         .result-desc { color: #666; line-height: 1.8; margin-bottom: 40px; }
         .result-type { font-size: 48px; margin-bottom: 10px; letter-spacing: 5px; }
-        .result-iq { font-size: 72px; margin-bottom: 20px; color: #fff; text-shadow: 0 0 30px rgba(255,255,255,0.5); }
-        .result-badge { display: inline-block; padding: 10px 25px; border: 2px solid #fff; font-size: 14px; letter-spacing: 3px; margin-bottom: 30px; }
+        .iq-badge { font-size: 72px; margin-bottom: 20px; }
         .gate { display: none; text-align: center; }
         .gate.show { display: block; }
         .gate-title { font-size: 20px; margin-bottom: 20px; }
@@ -116,10 +115,10 @@
             <p style="color: #333; font-size: 12px;">или вернись позже</p>
         </div>
         <div id="result" class="result">
-            <p class="result-iq">180 IQ</p>
-            <p class="result-badge">ГЕНИЙ</p>
-            <p class="result-title">ТЫ В 0.1%</p>
-            <p class="result-desc">Твой IQ один из самых высоких среди всех, кто проходил этот тест. Твоя способность видеть неочевидное и думать нестандартно — это редкий дар.</p>
+            <div class="iq-badge">🧠</div>
+            <p class="result-type">140 IQ</p>
+            <p class="result-title">ГЕНИЙ</p>
+            <p class="result-desc">Твой IQ — 140! Ты в top 0.1% населения. Твои способности к анализу и решению сложных задач выдающиеся. Такие люди меняют мир.</p>
             <div class="line"></div>
             <p style="color: #333; font-size: 12px; margin-top: 30px;">Поделись с друзьями</p>
         </div>
@@ -140,15 +139,19 @@
                 document.getElementById('q' + (q + 1)).classList.add('active');
                 updateProgress(q + 1);
             } else {
-                showResult();
+                showGate();
             }
         }
         function updateProgress(num) {
             document.getElementById('progress').textContent = num + '/' + totalQuestions;
         }
-        function showResult() {
+        function showGate() {
             document.getElementById('gate').classList.add('show');
             document.getElementById('progress').style.display = 'none';
+        }
+        function showResult() {
+            document.getElementById('gate').classList.remove('show');
+            document.getElementById('result').classList.add('show');
         }
     </script>
 </body>
