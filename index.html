@@ -2,192 +2,243 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexus Type</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Nexus Type — Узнай свой психотип</title>
+<meta name="description" content="Научный тест личности. Big Five, MBTI и DISC. 24 вопроса, 8 архетипов.">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXEB251396"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-YXEB251396');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{height:100%}
-body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;min-height:100%}
+:root{
+  --green:#21A038;
+  --green-d:#1a8030;
+  --green-bg:#F0FAF2;
+  --black:#0D0D0D;
+  --gray1:#1A1A1A;
+  --gray2:#3D3D3D;
+  --gray3:#6B6B6B;
+  --gray4:#B0B0B0;
+  --gray5:#E8E8E8;
+  --gray6:#F5F5F5;
+  --white:#FFFFFF;
+  --r:16px;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+html,body{height:100%;-webkit-font-smoothing:antialiased;font-family:var(--font)}
+body{background:var(--white);color:var(--black)}
 
-.page{display:none}
-.page.active{display:flex;flex-direction:column;min-height:100vh}
+/* PAGES */
+.pg{display:none;min-height:100vh;flex-direction:column}
+.pg.on{display:flex}
 
-/* ── INTRO ── */
-#p-intro{background:#0a0a0a;justify-content:flex-end;padding:0 24px 52px;position:relative;overflow:hidden}
-.intro-glow{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.03) 0%,transparent 70%);top:-80px;right:-80px;pointer-events:none}
-.intro-tag{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#444;margin-bottom:28px}
-.intro-h1{font-size:52px;font-weight:800;line-height:1.0;letter-spacing:-.03em;margin-bottom:16px;color:#fff}
-.intro-sub{font-size:16px;color:#555;line-height:1.6;margin-bottom:40px}
-.intro-stats{display:flex;gap:36px;margin-bottom:36px}
-.istat-n{font-size:30px;font-weight:700;letter-spacing:-.02em;color:#fff}
-.istat-l{font-size:11px;color:#444;text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
-.intro-methods{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:44px}
-.imethod{background:#111;border:1px solid #1e1e1e;border-radius:8px;padding:7px 13px;font-size:12px;color:#555;font-weight:500}
-.imethod b{color:#888}
-.btn-primary{width:100%;background:#fff;color:#000;border:none;border-radius:16px;padding:19px;font-size:17px;font-weight:700;cursor:pointer;letter-spacing:-.01em;transition:transform .1s,opacity .1s}
-.btn-primary:active{transform:scale(.98);opacity:.9}
+/* ─── INTRO ─── */
+#pg-intro{background:var(--white)}
+.intro-nav{padding:20px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--gray5)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:32px;height:32px;background:var(--green);border-radius:9px;display:flex;align-items:center;justify-content:center}
+.logo-mark svg{width:16px;height:16px;fill:white}
+.logo-text{font-size:15px;font-weight:800;color:var(--black);letter-spacing:-.02em}
+.logo-text span{color:var(--green)}
+.nav-tag{font-size:12px;color:var(--gray4);font-weight:500}
+.intro-body{flex:1;padding:48px 24px 40px;display:flex;flex-direction:column}
+.intro-badge{display:inline-flex;align-items:center;gap:6px;background:var(--green-bg);color:var(--green);border-radius:100px;padding:6px 14px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:28px;width:fit-content}
+.intro-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.intro-h1{font-size:clamp(38px,9vw,56px);font-weight:900;line-height:1.0;letter-spacing:-.04em;color:var(--black);margin-bottom:16px}
+.intro-h1 em{font-style:normal;color:var(--green)}
+.intro-sub{font-size:16px;color:var(--gray3);line-height:1.65;margin-bottom:40px;max-width:340px}
+.intro-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray5);border:1px solid var(--gray5);border-radius:var(--r);overflow:hidden;margin-bottom:40px}
+.istat{background:var(--white);padding:20px 16px;text-align:center}
+.istat-n{font-size:28px;font-weight:800;color:var(--black);letter-spacing:-.03em;line-height:1}
+.istat-n span{color:var(--green)}
+.istat-l{font-size:11px;color:var(--gray4);text-transform:uppercase;letter-spacing:.06em;margin-top:4px;font-weight:600}
+.intro-methods{display:flex;flex-direction:column;gap:10px;margin-bottom:40px}
+.imethod{display:flex;align-items:center;gap:16px;padding:16px 20px;border:1px solid var(--gray5);border-radius:var(--r);transition:border-color .2s,background .2s}
+.imethod:hover{border-color:var(--green);background:var(--green-bg)}
+.imethod-icon{width:40px;height:40px;border-radius:10px;background:var(--gray6);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.imethod-name{font-size:14px;font-weight:700;color:var(--black)}
+.imethod-desc{font-size:12px;color:var(--gray4);margin-top:1px}
+.imethod-tag{margin-left:auto;font-size:11px;font-weight:700;color:var(--green);background:var(--green-bg);padding:4px 10px;border-radius:6px;flex-shrink:0}
+.intro-consent{background:#FFFBEB;border:1px solid #FDE68A;border-radius:var(--r);padding:16px 20px;margin-bottom:32px;display:flex;gap:12px}
+.ic-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.ic-title{font-size:11px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.ic-text{font-size:12px;color:#78350F;line-height:1.55}
+.btn-green{width:100%;background:var(--green);color:var(--white);border:none;border-radius:var(--r);padding:19px;font-size:17px;font-weight:700;cursor:pointer;font-family:var(--font);letter-spacing:-.01em;transition:background .15s,transform .1s,box-shadow .15s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-green:hover{background:var(--green-d);box-shadow:0 8px 24px rgba(33,160,56,.25)}
+.btn-green:active{transform:scale(.98)}
+.btn-green svg{width:18px;height:18px;fill:white;flex-shrink:0}
+.intro-note{text-align:center;font-size:12px;color:var(--gray4);margin-top:14px}
 
-/* ── CONSENT ── */
-#p-consent{background:#0a0a0a;padding:60px 24px 52px;justify-content:space-between}
-.consent-icon{width:60px;height:60px;background:#111;border:1px solid #1e1e1e;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:28px}
-.consent-h{font-size:30px;font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
-.consent-lead{font-size:15px;color:#555;line-height:1.6;margin-bottom:28px}
-.consent-list{display:flex;flex-direction:column;gap:14px;margin-bottom:40px}
-.ci{display:flex;gap:14px;align-items:flex-start}
-.ci-line{width:1px;background:#222;flex-shrink:0;margin-top:6px;height:14px}
-.ci-text{font-size:14px;color:#666;line-height:1.5}
-.ci-text b{color:#aaa}
-.consent-btns{display:flex;flex-direction:column;gap:10px}
-.btn-secondary{background:transparent;color:#555;border:1px solid #1e1e1e;border-radius:16px;padding:17px;font-size:15px;font-weight:500;cursor:pointer;transition:background .15s}
-.btn-secondary:active{background:#111}
+/* ─── QUIZ ─── */
+#pg-quiz{background:var(--white)}
+.quiz-header{padding:16px 24px;border-bottom:1px solid var(--gray5);display:flex;align-items:center;gap:14px;position:sticky;top:0;background:var(--white);z-index:10}
+.back-btn{width:40px;height:40px;border:1px solid var(--gray5);border-radius:12px;background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .15s,border-color .15s}
+.back-btn:hover{background:var(--gray6);border-color:var(--gray4)}
+.back-btn svg{width:18px;height:18px;stroke:var(--gray3);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.prog-wrap{flex:1}
+.prog-bar{height:4px;background:var(--gray5);border-radius:100px;overflow:hidden}
+.prog-fill{height:100%;background:var(--green);border-radius:100px;transition:width .45s cubic-bezier(.4,0,.2,1)}
+.prog-label{font-size:12px;color:var(--gray4);margin-top:6px;font-weight:500}
+.quiz-cnt{font-size:13px;color:var(--gray4);font-weight:600;flex-shrink:0;min-width:44px;text-align:right}
+.quiz-body{flex:1;padding:32px 24px 120px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.quiz-dim{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.quiz-dim::before{content:'';width:20px;height:2px;background:var(--green);border-radius:1px}
+.quiz-q{font-size:22px;font-weight:800;line-height:1.25;letter-spacing:-.02em;color:var(--black);margin-bottom:28px}
+.quiz-opts{display:flex;flex-direction:column;gap:10px}
+.qopt{background:var(--white);border:1.5px solid var(--gray5);border-radius:var(--r);padding:18px 20px;cursor:pointer;display:flex;align-items:center;gap:14px;transition:border-color .15s,background .15s;-webkit-tap-highlight-color:transparent}
+.qopt:hover{border-color:var(--green);background:var(--green-bg)}
+.qopt.sel{background:var(--green);border-color:var(--green)}
+.qopt-l{width:30px;height:30px;border-radius:8px;background:var(--gray6);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gray3);flex-shrink:0;transition:all .15s}
+.qopt.sel .qopt-l{background:rgba(255,255,255,.2);color:var(--white)}
+.qopt-t{font-size:15px;line-height:1.4;color:var(--gray2);font-weight:500;transition:color .15s}
+.qopt.sel .qopt-t{color:var(--white);font-weight:600}
+.quiz-footer{position:fixed;bottom:0;left:0;right:0;padding:16px 24px 36px;background:linear-gradient(to top,var(--white) 70%,transparent);border-top:1px solid transparent}
+.btn-next{width:100%;background:var(--green);color:var(--white);border:none;border-radius:var(--r);padding:19px;font-size:17px;font-weight:700;cursor:pointer;font-family:var(--font);transition:background .15s,opacity .15s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-next:disabled{background:var(--gray5);color:var(--gray4);cursor:default}
+.btn-next:not(:disabled):hover{background:var(--green-d)}
+.btn-next svg{width:18px;height:18px;fill:currentColor}
 
-/* ── QUIZ ── */
-#p-quiz{background:#0a0a0a;padding:0}
-.quiz-top{padding:56px 24px 0;display:flex;align-items:center;gap:16px;margin-bottom:36px}
-.quiz-back-btn{width:40px;height:40px;background:#111;border:1px solid #1e1e1e;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
-.quiz-back-btn svg{width:18px;height:18px;stroke:#555;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.quiz-prog-wrap{flex:1}
-.quiz-prog-bar{height:2px;background:#1a1a1a;border-radius:100px;overflow:hidden}
-.quiz-prog-fill{height:100%;background:#fff;border-radius:100px;transition:width .4s cubic-bezier(.4,0,.2,1)}
-.quiz-cnt{font-size:13px;color:#333;font-weight:500;flex-shrink:0}
-.quiz-scroll{flex:1;padding:0 24px 120px;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.quiz-dim-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#333;margin-bottom:18px}
-.quiz-question{font-size:22px;font-weight:700;line-height:1.3;letter-spacing:-.02em;margin-bottom:28px;color:#fff}
-.quiz-options{display:flex;flex-direction:column;gap:10px}
-.qopt{background:#0f0f0f;border:1px solid #1a1a1a;border-radius:16px;padding:18px 20px;cursor:pointer;display:flex;align-items:center;gap:16px;transition:border-color .15s,background .15s}
-.qopt:active{background:#141414}
-.qopt.sel{background:#fff;border-color:#fff}
-.qopt-l{width:28px;height:28px;border-radius:7px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#333;flex-shrink:0;transition:all .15s}
-.qopt.sel .qopt-l{background:#000;color:#fff}
-.qopt-t{font-size:15px;line-height:1.4;color:#888;font-weight:400;transition:color .15s}
-.qopt.sel .qopt-t{color:#000}
-.quiz-footer{position:fixed;bottom:0;left:0;right:0;padding:16px 24px 40px;background:linear-gradient(to top,#0a0a0a 65%,transparent)}
-.btn-next{width:100%;background:#fff;color:#000;border:none;border-radius:16px;padding:19px;font-size:17px;font-weight:700;cursor:pointer;transition:opacity .15s}
-.btn-next:disabled{opacity:.2;cursor:default}
-
-/* ── LOADING ── */
-#p-loading{background:#0a0a0a;align-items:center;justify-content:center;text-align:center;padding:40px 24px}
-.load-ring{width:52px;height:52px;border:2px solid #1a1a1a;border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 36px}
+/* ─── LOADING ─── */
+#pg-loading{background:var(--white);align-items:center;justify-content:center;text-align:center;padding:40px 24px}
+.load-icon{width:72px;height:72px;border-radius:20px;background:var(--green-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 32px;position:relative}
+.load-ring{position:absolute;inset:-8px;border:2px solid var(--gray5);border-top-color:var(--green);border-radius:50%;animation:spin 1s linear infinite}
+.load-icon-inner{font-size:30px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.load-h{font-size:22px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
-.load-sub{font-size:14px;color:#333;margin-bottom:44px}
-.load-steps{display:flex;flex-direction:column;gap:14px;text-align:left;width:100%;max-width:260px}
-.lstep{display:flex;align-items:center;gap:14px;font-size:14px;color:#222;transition:color .4s}
-.lstep.vis{color:#555}
-.lstep.done{color:#fff}
-.lstep-dot{width:6px;height:6px;border-radius:50%;background:#1a1a1a;flex-shrink:0;transition:all .3s}
-.lstep.vis .lstep-dot{background:#333}
-.lstep.done .lstep-dot{background:#fff}
+.load-h{font-size:24px;font-weight:800;letter-spacing:-.02em;color:var(--black);margin-bottom:8px}
+.load-sub{font-size:15px;color:var(--gray4);margin-bottom:48px}
+.load-steps{display:flex;flex-direction:column;gap:16px;text-align:left;width:100%;max-width:280px}
+.lstep{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--gray5);font-weight:500;transition:color .4s}
+.lstep.vis{color:var(--gray4)}
+.lstep.done{color:var(--black)}
+.lstep-dot{width:8px;height:8px;border-radius:50%;background:var(--gray5);flex-shrink:0;transition:all .3s}
+.lstep.vis .lstep-dot{background:var(--gray4)}
+.lstep.done .lstep-dot{background:var(--green);box-shadow:0 0 0 3px var(--green-bg)}
 
-/* ── RESULT ── */
-#p-result{background:#0a0a0a;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.result-hero{padding:64px 24px 40px;text-align:center}
-.result-eyebrow{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#333;margin-bottom:20px}
-.result-name{font-size:60px;font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:14px;color:#fff}
-.result-tagline{font-size:17px;color:#555;line-height:1.5;margin-bottom:28px;white-space:pre-line}
-.result-codes{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.rcode{padding:5px 12px;border-radius:6px;font-size:11px;font-weight:600;letter-spacing:.05em;background:#111;border:1px solid #1e1e1e;color:#444}
-.divider{height:1px;background:#111;margin:0 24px}
-.rsec{padding:28px 24px}
-.rsec-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#333;margin-bottom:20px}
-.rsec-text{font-size:15px;color:#555;line-height:1.7}
+/* ─── RESULT ─── */
+#pg-result{background:var(--white);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.result-hero{background:var(--black);padding:64px 24px 48px;text-align:center;position:relative;overflow:hidden}
+.result-hero::before{content:'';position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(33,160,56,.15) 0%,transparent 70%);top:-80px;left:50%;transform:translateX(-50%)}
+.result-eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:20px;position:relative}
+.result-name{font-size:clamp(44px,10vw,64px);font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:14px;color:var(--white);position:relative}
+.result-tagline{font-size:16px;color:#888;line-height:1.5;margin-bottom:28px;white-space:pre-line;position:relative}
+.result-codes{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;position:relative}
+.rcode{padding:5px 12px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.05em;background:#1a1a1a;border:1px solid #2a2a2a;color:#666}
+.rsec{padding:28px 24px;border-bottom:1px solid var(--gray5)}
+.rsec:last-child{border-bottom:none}
+.rsec-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray4);margin-bottom:20px}
+.rsec-text{font-size:15px;color:var(--gray2);line-height:1.7}
 .score-list{display:flex;flex-direction:column;gap:14px}
 .score-row{display:flex;align-items:center;gap:14px}
-.score-name{font-size:13px;color:#444;width:130px;flex-shrink:0;font-weight:500}
-.score-track{flex:1;height:3px;background:#1a1a1a;border-radius:100px;overflow:hidden}
-.score-fill{height:100%;background:#fff;border-radius:100px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
-.score-pct{font-size:12px;font-weight:600;color:#555;width:32px;text-align:right;flex-shrink:0}
+.score-name{font-size:13px;color:var(--gray3);width:130px;flex-shrink:0;font-weight:500}
+.score-track{flex:1;height:4px;background:var(--gray5);border-radius:100px;overflow:hidden}
+.score-fill{height:100%;background:var(--green);border-radius:100px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.score-pct{font-size:12px;font-weight:700;color:var(--black);width:34px;text-align:right;flex-shrink:0}
 .traits-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
-.tcard{background:#0f0f0f;border:1px solid #1a1a1a;border-radius:14px;padding:16px}
-.tcard-icon{font-size:20px;margin-bottom:10px}
-.tcard-name{font-size:13px;font-weight:700;color:#ccc;margin-bottom:4px}
-.tcard-desc{font-size:12px;color:#444;line-height:1.4}
-.blur-gate{position:relative}
-.blur-inner{padding:28px 24px;filter:blur(7px);user-select:none;pointer-events:none}
-.gate-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;background:linear-gradient(to bottom,rgba(10,10,10,0) 0%,rgba(10,10,10,.97) 35%)}
-.gate-h{font-size:22px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px;color:#fff}
-.gate-sub{font-size:14px;color:#444;margin-bottom:24px;line-height:1.5}
-.btn-unlock{display:block;width:calc(100% - 48px);background:#fff;color:#000;border:none;border-radius:16px;padding:19px;font-size:17px;font-weight:700;cursor:pointer;text-decoration:none;text-align:center;transition:opacity .15s}
-.btn-unlock:active{opacity:.85}
-.share-sec{padding:28px 24px}
+.tcard{background:var(--gray6);border-radius:14px;padding:18px}
+.tcard-icon{font-size:22px;margin-bottom:10px}
+.tcard-name{font-size:13px;font-weight:700;color:var(--black);margin-bottom:4px}
+.tcard-desc{font-size:12px;color:var(--gray3);line-height:1.4}
+/* blur gate */
+.blur-gate{position:relative;border-bottom:1px solid var(--gray5)}
+.blur-inner{padding:28px 24px;filter:blur(6px);user-select:none;pointer-events:none}
+.gate-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:28px 24px;background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,.97) 40%)}
+.gate-h{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--black);margin-bottom:8px;text-align:center}
+.gate-sub{font-size:14px;color:var(--gray3);margin-bottom:24px;line-height:1.5;text-align:center}
+.btn-unlock{display:block;width:100%;background:var(--green);color:var(--white);border:none;border-radius:var(--r);padding:19px;font-size:17px;font-weight:700;cursor:pointer;text-decoration:none;text-align:center;font-family:var(--font);transition:background .15s,box-shadow .15s}
+.btn-unlock:hover{background:var(--green-d);box-shadow:0 8px 24px rgba(33,160,56,.25)}
+/* share */
 .share-btns{display:flex;flex-direction:column;gap:10px;margin-top:20px}
-.btn-tg{background:#229ED9;color:#fff;border:none;border-radius:14px;padding:17px;font-size:15px;font-weight:600;cursor:pointer;transition:opacity .15s}
+.btn-tg{background:#229ED9;color:var(--white);border:none;border-radius:14px;padding:17px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);transition:opacity .15s}
 .btn-tg:active{opacity:.85}
-.btn-copy{background:#111;color:#fff;border:1px solid #1e1e1e;border-radius:14px;padding:17px;font-size:15px;font-weight:600;cursor:pointer;transition:background .15s}
-.btn-copy:active{background:#1a1a1a}
-.btn-retry{display:block;width:100%;background:transparent;color:#333;border:none;padding:20px;font-size:14px;cursor:pointer;text-align:center}
-.disclaimer{padding:0 24px 40px;font-size:11px;color:#222;line-height:1.7;text-align:center}
+.btn-copy{background:var(--gray6);color:var(--black);border:1px solid var(--gray5);border-radius:14px;padding:17px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--font);transition:background .15s}
+.btn-copy:hover{background:var(--gray5)}
+.btn-retry{display:block;width:100%;background:transparent;color:var(--gray4);border:none;padding:20px;font-size:14px;cursor:pointer;text-align:center;font-family:var(--font)}
+.disclaimer{padding:0 24px 48px;font-size:11px;color:var(--gray4);line-height:1.7;text-align:center}
 
 /* Toast */
-.toast{position:fixed;bottom:36px;left:50%;transform:translateX(-50%) translateY(16px);background:#fff;color:#000;border-radius:12px;padding:12px 20px;font-size:14px;font-weight:600;z-index:9999;opacity:0;transition:all .25s;white-space:nowrap;pointer-events:none}
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--black);color:var(--white);border-radius:12px;padding:13px 22px;font-size:14px;font-weight:600;z-index:9999;opacity:0;transition:all .25s;white-space:nowrap;pointer-events:none;font-family:var(--font)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:380px){
+  .intro-h1{font-size:34px}
+  .quiz-q{font-size:19px}
+  .result-name{font-size:40px}
+}
 </style>
 </head>
 <body>
 <div class="toast" id="toast"></div>
 
-<!-- INTRO -->
-<div class="page active" id="p-intro">
-  <div class="intro-glow"></div>
-  <div class="intro-tag">Nexus Type System · v1.0</div>
-  <h1 class="intro-h1">Кто ты<br>на самом<br>деле?</h1>
-  <p class="intro-sub">Тест личности нового поколения.<br>24 вопроса — один точный ответ.</p>
-  <div class="intro-stats">
-    <div><div class="istat-n">24</div><div class="istat-l">вопроса</div></div>
-    <div><div class="istat-n">8</div><div class="istat-l">архетипа</div></div>
-    <div><div class="istat-n">5 мин</div><div class="istat-l">времени</div></div>
+<!-- ══ INTRO ══ -->
+<div class="pg on" id="pg-intro">
+  <nav class="intro-nav">
+    <a href="#" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 16 16"><path d="M8 0L0 4v8l8 4 8-4V4L8 0zm0 2.5L13.5 5.5 8 8.5 2.5 5.5 8 2.5zM1.5 7L7 9.8V14L1.5 11.2V7zm7 7V9.8L14 7v4.2L8.5 14z"/></svg>
+      </div>
+      <span class="logo-text">Nexus<span>Type</span></span>
+    </a>
+    <span class="nav-tag">v1.0</span>
+  </nav>
+  <div class="intro-body">
+    <div class="intro-badge"><div class="intro-badge-dot"></div>Тест личности</div>
+    <h1 class="intro-h1">Узнай, кто ты<br>на <em>самом деле</em></h1>
+    <p class="intro-sub">Научный тест нового поколения. Объединяет три проверенные методологии в единую систему из 8 архетипов.</p>
+    <div class="intro-stats">
+      <div class="istat"><div class="istat-n"><span>24</span></div><div class="istat-l">вопроса</div></div>
+      <div class="istat"><div class="istat-n"><span>8</span></div><div class="istat-l">архетипа</div></div>
+      <div class="istat"><div class="istat-n">5</div><div class="istat-l">минут</div></div>
+    </div>
+    <div class="intro-methods">
+      <div class="imethod"><div class="imethod-icon">🔬</div><div><div class="imethod-name">Big Five (OCEAN)</div><div class="imethod-desc">Costa & McCrae, 1992 · Золотой стандарт</div></div><div class="imethod-tag">OCEAN</div></div>
+      <div class="imethod"><div class="imethod-icon">🧩</div><div><div class="imethod-name">MBTI</div><div class="imethod-desc">Myers-Briggs · 4 оси когнитивных предпочтений</div></div><div class="imethod-tag">16 типов</div></div>
+      <div class="imethod"><div class="imethod-icon">⚡</div><div><div class="imethod-name">DISC</div><div class="imethod-desc">Marston, 1928 · Поведенческие стили</div></div><div class="imethod-tag">4 стиля</div></div>
+    </div>
+    <div class="intro-consent">
+      <div class="ic-icon">🔒</div>
+      <div><div class="ic-title">Согласие на обработку данных</div><div class="ic-text">Ответы анонимны. Мы не собираем личные данные. Результаты хранятся только в вашем браузере.</div></div>
+    </div>
+    <button class="btn-green" id="btnStart">
+      Начать тест
+      <svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+    </button>
+    <div class="intro-note">Бесплатно · Без регистрации</div>
   </div>
-  <div class="intro-methods">
-    <div class="imethod"><b>Big Five</b> OCEAN</div>
-    <div class="imethod"><b>MBTI</b> 4 оси</div>
-    <div class="imethod"><b>DISC</b> поведение</div>
-  </div>
-  <button class="btn-primary" id="btnStart">Начать →</button>
 </div>
 
-<!-- CONSENT -->
-<div class="page" id="p-consent">
-  <div class="consent-icon">🔒</div>
-  <div class="consent-h">Прежде чем начать</div>
-  <p class="consent-lead">Мы уважаем твою приватность.</p>
-  <div class="consent-list">
-    <div class="ci"><div class="ci-line"></div><div class="ci-text"><b>Анонимность.</b> Мы не собираем имя, email или телефон.</div></div>
-    <div class="ci"><div class="ci-line"></div><div class="ci-text"><b>Локально.</b> Результаты хранятся только в твоём браузере.</div></div>
-    <div class="ci"><div class="ci-line"></div><div class="ci-text"><b>Ответы</b> используются только для расчёта психотипа.</div></div>
-    <div class="ci"><div class="ci-line"></div><div class="ci-text"><b>Не диагностика.</b> Тест носит ознакомительный характер.</div></div>
-  </div>
-  <div class="consent-btns">
-    <button class="btn-primary" id="btnAgree">Согласен, начать тест</button>
-    <button class="btn-secondary" id="btnConsentBack">Назад</button>
-  </div>
-</div>
-
-<!-- QUIZ -->
-<div class="page" id="p-quiz">
-  <div class="quiz-top">
-    <div class="quiz-back-btn" id="btnQuizBack">
+<!-- ══ QUIZ ══ -->
+<div class="pg" id="pg-quiz">
+  <div class="quiz-header">
+    <div class="back-btn" id="btnBack">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
     </div>
-    <div class="quiz-prog-wrap">
-      <div class="quiz-prog-bar"><div class="quiz-prog-fill" id="qFill" style="width:4%"></div></div>
+    <div class="prog-wrap">
+      <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:4%"></div></div>
+      <div class="prog-label" id="progLabel">Вопрос 1 из 24</div>
     </div>
-    <div class="quiz-cnt" id="qCnt">1 / 24</div>
+    <div class="quiz-cnt" id="qCnt">1/24</div>
   </div>
-  <div class="quiz-scroll">
-    <div class="quiz-dim-label" id="qDim"></div>
-    <div class="quiz-question" id="qText"></div>
-    <div class="quiz-options" id="qOpts"></div>
+  <div class="quiz-body">
+    <div class="quiz-dim" id="qDim"></div>
+    <div class="quiz-q" id="qText"></div>
+    <div class="quiz-opts" id="qOpts"></div>
   </div>
   <div class="quiz-footer">
-    <button class="btn-next" id="btnNext" disabled>Далее</button>
+    <button class="btn-next" id="btnNext" disabled>
+      Далее
+      <svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+    </button>
   </div>
 </div>
 
-<!-- LOADING -->
-<div class="page" id="p-loading">
-  <div class="load-ring"></div>
+<!-- ══ LOADING ══ -->
+<div class="pg" id="pg-loading">
+  <div class="load-icon">
+    <div class="load-ring"></div>
+    <div class="load-icon-inner">🧠</div>
+  </div>
   <div class="load-h">Анализируем личность</div>
   <div class="load-sub">Обрабатываем 24 ответа</div>
   <div class="load-steps">
@@ -199,33 +250,30 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   </div>
 </div>
 
-<!-- RESULT -->
-<div class="page" id="p-result">
+<!-- ══ RESULT ══ -->
+<div class="pg" id="pg-result">
   <div class="result-hero">
     <div class="result-eyebrow">Твой Nexus-архетип</div>
     <div class="result-name" id="rName"></div>
     <div class="result-tagline" id="rTag"></div>
     <div class="result-codes" id="rCodes"></div>
   </div>
-  <div class="divider"></div>
   <div class="rsec">
     <div class="rsec-label">Профиль личности</div>
     <div class="score-list" id="rScores"></div>
   </div>
-  <div class="divider"></div>
   <div class="rsec">
     <div class="rsec-label">Архетип</div>
     <div class="rsec-text" id="rDesc"></div>
     <div class="traits-grid" id="rTraits"></div>
   </div>
-  <div class="divider"></div>
   <div class="blur-gate">
     <div class="blur-inner">
       <div class="rsec-label">Карьера и призвание</div>
-      <div class="rsec-text">Твой архетип идеально подходит для ролей, где требуется стратегическое мышление. Лучшие пути: предпринимательство, стратегический консалтинг, продуктовый менеджмент. Ты создаёшь там, где другие только планируют.</div>
-      <br><br>
-      <div class="rsec-label">Отношения</div>
-      <div class="rsec-text">В отношениях ты ценишь глубину над широтой. Предпочитаешь несколько близких связей большому кругу знакомых. Твой стиль общения — прямой и содержательный.</div>
+      <div class="rsec-text">Твой архетип идеально подходит для ролей, где требуется стратегическое мышление. Лучшие пути: предпринимательство, стратегический консалтинг, продуктовый менеджмент. Ты создаёшь там, где другие только планируют. Твои сильные стороны делают тебя незаменимым.</div>
+      <br>
+      <div class="rsec-label" style="margin-top:20px">Отношения</div>
+      <div class="rsec-text">В отношениях ты ценишь глубину над широтой. Предпочитаешь несколько близких связей большому кругу знакомых. Твой стиль общения — прямой и содержательный. Когда говоришь — люди слушают.</div>
     </div>
     <div class="gate-overlay">
       <div class="gate-h">Полный анализ</div>
@@ -233,9 +281,8 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
       <a id="refLink" href="https://t.me/mira?start=ref_7030530967" class="btn-unlock">Открыть в Mira →</a>
     </div>
   </div>
-  <div class="divider"></div>
-  <div class="share-sec">
-    <div class="rsec-label">Поделиться</div>
+  <div class="rsec">
+    <div class="rsec-label">Поделиться результатом</div>
     <div class="rsec-text" id="shareTitle"></div>
     <div class="share-btns">
       <button class="btn-tg" id="btnShareTG">Отправить в Telegram</button>
@@ -243,10 +290,11 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
     </div>
   </div>
   <button class="btn-retry" id="btnRetry">Пройти заново</button>
-  <div class="disclaimer">Big Five — Costa & McCrae, 1992 · MBTI — Myers-Briggs · DISC — Marston, 1928<br>Тест носит ознакомительный характер и не является клинической диагностикой</div>
+  <div class="disclaimer">Nexus Type System основана на: Big Five (OCEAN) — Costa & McCrae, 1992; MBTI — Myers-Briggs Type Indicator; DISC — Marston, 1928.<br>Тест носит ознакомительный характер и не является клинической диагностикой.</div>
 </div>
 
 <script>
+(function(){
 var QS=[
 {d:"Открытость",t:"Ты читаешь статью о квантовой физике. Твоя реакция:",o:[{t:"Захватывает — сразу хочу копнуть глубже",s:{openness:4,intuition:3}},{t:"Интересно, если объяснят простыми словами",s:{openness:2,intuition:1}},{t:"Предпочту что-то более практичное",s:{openness:-1,intuition:-2}},{t:"Не моя тема, лучше займусь делом",s:{openness:-3,dominance:2}}]},
 {d:"Интуиция",t:"Когда ты решаешь проблему, ты чаще:",o:[{t:"Вижу паттерн сразу — потом объясняю логику",s:{intuition:4,openness:2}},{t:"Собираю факты, потом делаю вывод",s:{intuition:-2,conscientiousness:3}},{t:"Доверяю интуиции, но проверяю данными",s:{intuition:2,compliance:2}},{t:"Действую сразу — анализ по ходу",s:{dominance:3,perceiving:2}}]},
@@ -275,88 +323,98 @@ var QS=[
 ];
 
 var AT={
-ARCHITECT:{n:"АРХИТЕКТОР",tag:"Строишь системы,\nкоторые работают без тебя",codes:["INTJ","C+O","DISC: C"],desc:"Ты видишь структуру там, где другие видят хаос. Твой разум работает как архитектурное бюро — каждая идея проходит через фильтр системного мышления. Ты не просто решаешь проблемы, ты создаёшь системы, которые предотвращают их появление.",traits:[{i:"🏗",n:"Системное мышление",d:"Видишь связи и паттерны"},{i:"🎯",n:"Стратегический фокус",d:"Думаешь на несколько шагов вперёд"},{i:"📐",n:"Высокие стандарты",d:"Не принимаешь достаточно хорошо"},{i:"🔍",n:"Аналитическая точность",d:"Детали имеют значение"}],p:{conscientiousness:1.5,openness:1.2,extraversion:-0.5,compliance:1.5,neuroticism:-1.0}},
-CATALYST:{n:"КАТАЛИЗАТОР",tag:"Зажигаешь других\nи двигаешь мир вперёд",codes:["ENFJ","E+A","DISC: I"],desc:"Ты — живой двигатель перемен. Твоя суперсила — видеть потенциал в людях и помогать им его раскрыть. Высокая экстраверсия и доброжелательность создают магнетизм, который притягивает людей.",traits:[{i:"⚡",n:"Харизма",d:"Заряжаешь энергией всех вокруг"},{i:"👥",n:"Эмпатия",d:"Чувствуешь людей на глубоком уровне"},{i:"🌟",n:"Вдохновение",d:"Помогаешь другим расти"},{i:"🎭",n:"Влияние",d:"Меняешь мнения через эмоции"}],p:{extraversion:1.5,agreeableness:1.2,influence:1.5,feeling:1.0,neuroticism:-0.5}},
-PIONEER:{n:"ПИОНЕР",tag:"Исследуешь неизведанное\nи создаёшь новое",codes:["ENTP","O+E","DISC: D+I"],desc:"Ты живёшь на переднем крае возможного. Твой мозг постоянно генерирует идеи — иногда быстрее, чем ты успеваешь их реализовать. Ты не боишься ошибок — для тебя это просто данные для следующей итерации.",traits:[{i:"🚀",n:"Инновационность",d:"Видишь возможности там где другие — стены"},{i:"🧪",n:"Экспериментальность",d:"Пробуешь, ошибаешься, улучшаешь"},{i:"💡",n:"Генерация идей",d:"Поток идей не останавливается"},{i:"🌍",n:"Широкий кругозор",d:"Связываешь несвязанное"}],p:{openness:1.5,extraversion:1.0,dominance:1.0,influence:1.0,perceiving:1.2}},
-GUARDIAN:{n:"ХРАНИТЕЛЬ",tag:"Держишь мир вместе\nкогда всё рушится",codes:["ISFJ","A+C","DISC: S"],desc:"Ты — тихая сила, на которой держится всё. Пока другие генерируют идеи, ты обеспечиваешь то, что всё реально работает. Люди чувствуют себя в безопасности рядом с тобой.",traits:[{i:"🛡",n:"Надёжность",d:"На тебя всегда можно положиться"},{i:"🌿",n:"Стабильность",d:"Якорь в шторм для всей команды"},{i:"💚",n:"Забота",d:"Замечаешь нужды других раньше них"},{i:"🤝",n:"Преданность",d:"Верен своим людям и ценностям"}],p:{agreeableness:1.5,steadiness:1.5,conscientiousness:1.0,neuroticism:-0.5,dominance:-0.5}},
-COMMANDER:{n:"КОМАНДИР",tag:"Ведёшь к победе\nдаже когда путь неизвестен",codes:["ENTJ","E+C","DISC: D"],desc:"Ты рождён вести. Высокое доминирование и экстраверсия создают природного лидера, который не ждёт разрешения — он берёт инициативу. Твоя прямолинейность позволяет двигаться быстро там, где другие застревают в обсуждениях.",traits:[{i:"👑",n:"Лидерство",d:"Естественно берёшь командование"},{i:"⚡",n:"Решительность",d:"Действуешь быстро и уверенно"},{i:"🎯",n:"Целеориентированность",d:"Фокус на результате, не процессе"},{i:"💪",n:"Сила воли",d:"Не останавливаешься перед препятствиями"}],p:{dominance:1.8,extraversion:1.2,conscientiousness:1.0,agreeableness:-0.5,neuroticism:-1.0}},
-SAGE:{n:"МУДРЕЦ",tag:"Понимаешь глубже —\nвидишь дальше",codes:["INTP","O+C","DISC: C"],desc:"Ты — мыслитель. Твой разум работает на глубине, недоступной большинству. Высокая открытость в сочетании с интровертностью создаёт уникальный тип: ты поглощаешь информацию из всех источников и синтезируешь её в оригинальные идеи.",traits:[{i:"🧠",n:"Глубокое мышление",d:"Идёшь туда куда другие не заходят"},{i:"📚",n:"Жажда знаний",d:"Учишься постоянно и с удовольствием"},{i:"🔭",n:"Концептуальность",d:"Видишь большую картину"},{i:"⚖️",n:"Объективность",d:"Анализируешь без эмоций"}],p:{openness:1.5,compliance:1.2,extraversion:-1.0,intuition:1.5,feeling:-0.5}},
-EMPATH:{n:"ЭМПАТ",tag:"Чувствуешь то,\nчто другие не замечают",codes:["INFJ","A+O","DISC: S+I"],desc:"Ты воспринимаешь мир через призму человеческих связей. Твоя интуиция в отношении людей граничит со сверхспособностью — ты чувствуешь настроение комнаты, видишь невысказанное, понимаешь мотивы.",traits:[{i:"💜",n:"Эмпатия",d:"Чувствуешь других как себя"},{i:"🌙",n:"Интуиция",d:"Знаешь без объяснений"},{i:"🎨",n:"Творчество",d:"Выражаешь глубину через творчество"},{i:"🌱",n:"Рост других",d:"Помогаешь людям становиться лучше"}],p:{agreeableness:1.5,feeling:1.5,openness:1.0,intuition:1.2,extraversion:-0.3}},
-MAVERICK:{n:"МЭВЕРИК",tag:"Играешь по своим правилам —\nи выигрываешь",codes:["ESTP","E+O","DISC: D+I"],desc:"Ты живёшь в настоящем моменте и делаешь это лучше всех. Высокая экстраверсия, открытость и доминирование создают человека, который не просто адаптируется к ситуации — он её создаёт.",traits:[{i:"🎲",n:"Адаптивность",d:"Лучший в любой ситуации"},{i:"🔥",n:"Энергия",d:"Заряжаешь всё вокруг"},{i:"🎯",n:"Прагматизм",d:"Результат важнее теории"},{i:"🌊",n:"Гибкость",d:"Меняешься быстрее обстоятельств"}],p:{extraversion:1.3,dominance:1.2,perceiving:1.5,openness:1.0,conscientiousness:-0.5}}
+ARCHITECT:{n:"АРХИТЕКТОР",tag:"Строишь системы,
+которые работают без тебя",codes:["INTJ","C+O","DISC: C"],desc:"Ты видишь структуру там, где другие видят хаос. Твой разум работает как архитектурное бюро — каждая идея проходит через фильтр системного мышления. Ты не просто решаешь проблемы, ты создаёшь системы, которые предотвращают их появление.",traits:[{i:"🏗",n:"Системное мышление",d:"Видишь связи и паттерны"},{i:"🎯",n:"Стратегический фокус",d:"Думаешь на несколько шагов вперёд"},{i:"📐",n:"Высокие стандарты",d:"Не принимаешь достаточно хорошо"},{i:"🔍",n:"Аналитическая точность",d:"Детали имеют значение"}],p:{conscientiousness:1.5,openness:1.2,extraversion:-0.5,compliance:1.5,neuroticism:-1.0}},
+CATALYST:{n:"КАТАЛИЗАТОР",tag:"Зажигаешь других
+и двигаешь мир вперёд",codes:["ENFJ","E+A","DISC: I"],desc:"Ты — живой двигатель перемен. Твоя суперсила — видеть потенциал в людях и помогать им его раскрыть. Высокая экстраверсия и доброжелательность создают магнетизм, который притягивает людей.",traits:[{i:"⚡",n:"Харизма",d:"Заряжаешь энергией всех вокруг"},{i:"👥",n:"Эмпатия",d:"Чувствуешь людей на глубоком уровне"},{i:"🌟",n:"Вдохновение",d:"Помогаешь другим расти"},{i:"🎭",n:"Влияние",d:"Меняешь мнения через эмоции"}],p:{extraversion:1.5,agreeableness:1.2,influence:1.5,feeling:1.0,neuroticism:-0.5}},
+PIONEER:{n:"ПИОНЕР",tag:"Исследуешь неизведанное
+и создаёшь новое",codes:["ENTP","O+E","DISC: D+I"],desc:"Ты живёшь на переднем крае возможного. Твой мозг постоянно генерирует идеи — иногда быстрее, чем ты успеваешь их реализовать. Ты не боишься ошибок — для тебя это просто данные для следующей итерации.",traits:[{i:"🚀",n:"Инновационность",d:"Видишь возможности там где другие — стены"},{i:"🧪",n:"Экспериментальность",d:"Пробуешь, ошибаешься, улучшаешь"},{i:"💡",n:"Генерация идей",d:"Поток идей не останавливается"},{i:"🌍",n:"Широкий кругозор",d:"Связываешь несвязанное"}],p:{openness:1.5,extraversion:1.0,dominance:1.0,influence:1.0,perceiving:1.2}},
+GUARDIAN:{n:"ХРАНИТЕЛЬ",tag:"Держишь мир вместе
+когда всё рушится",codes:["ISFJ","A+C","DISC: S"],desc:"Ты — тихая сила, на которой держится всё. Пока другие генерируют идеи, ты обеспечиваешь то, что всё реально работает. Люди чувствуют себя в безопасности рядом с тобой.",traits:[{i:"🛡",n:"Надёжность",d:"На тебя всегда можно положиться"},{i:"🌿",n:"Стабильность",d:"Якорь в шторм для всей команды"},{i:"💚",n:"Забота",d:"Замечаешь нужды других раньше них"},{i:"🤝",n:"Преданность",d:"Верен своим людям и ценностям"}],p:{agreeableness:1.5,steadiness:1.5,conscientiousness:1.0,neuroticism:-0.5,dominance:-0.5}},
+COMMANDER:{n:"КОМАНДИР",tag:"Ведёшь к победе
+даже когда путь неизвестен",codes:["ENTJ","E+C","DISC: D"],desc:"Ты рождён вести. Высокое доминирование и экстраверсия создают природного лидера, который не ждёт разрешения — он берёт инициативу. Твоя прямолинейность позволяет двигаться быстро там, где другие застревают.",traits:[{i:"👑",n:"Лидерство",d:"Естественно берёшь командование"},{i:"⚡",n:"Решительность",d:"Действуешь быстро и уверенно"},{i:"🎯",n:"Целеориентированность",d:"Фокус на результате, не процессе"},{i:"💪",n:"Сила воли",d:"Не останавливаешься перед препятствиями"}],p:{dominance:1.8,extraversion:1.2,conscientiousness:1.0,agreeableness:-0.5,neuroticism:-1.0}},
+SAGE:{n:"МУДРЕЦ",tag:"Понимаешь глубже —
+видишь дальше",codes:["INTP","O+C","DISC: C"],desc:"Ты — мыслитель. Твой разум работает на глубине, недоступной большинству. Высокая открытость в сочетании с интровертностью создаёт уникальный тип: ты поглощаешь информацию из всех источников и синтезируешь её в оригинальные идеи.",traits:[{i:"🧠",n:"Глубокое мышление",d:"Идёшь туда куда другие не заходят"},{i:"📚",n:"Жажда знаний",d:"Учишься постоянно и с удовольствием"},{i:"🔭",n:"Концептуальность",d:"Видишь большую картину"},{i:"⚖️",n:"Объективность",d:"Анализируешь без эмоций"}],p:{openness:1.5,compliance:1.2,extraversion:-1.0,intuition:1.5,feeling:-0.5}},
+EMPATH:{n:"ЭМПАТ",tag:"Чувствуешь то,
+что другие не замечают",codes:["INFJ","A+O","DISC: S+I"],desc:"Ты воспринимаешь мир через призму человеческих связей. Твоя интуиция в отношении людей граничит со сверхспособностью — ты чувствуешь настроение комнаты, видишь невысказанное, понимаешь мотивы.",traits:[{i:"💜",n:"Эмпатия",d:"Чувствуешь других как себя"},{i:"🌙",n:"Интуиция",d:"Знаешь без объяснений"},{i:"🎨",n:"Творчество",d:"Выражаешь глубину через творчество"},{i:"🌱",n:"Рост других",d:"Помогаешь людям становиться лучше"}],p:{agreeableness:1.5,feeling:1.5,openness:1.0,intuition:1.2,extraversion:-0.3}},
+MAVERICK:{n:"МЭВЕРИК",tag:"Играешь по своим правилам —
+и выигрываешь",codes:["ESTP","E+O","DISC: D+I"],desc:"Ты живёшь в настоящем моменте и делаешь это лучше всех. Высокая экстраверсия, открытость и доминирование создают человека, который не просто адаптируется к ситуации — он её создаёт.",traits:[{i:"🎲",n:"Адаптивность",d:"Лучший в любой ситуации"},{i:"🔥",n:"Энергия",d:"Заряжаешь всё вокруг"},{i:"🎯",n:"Прагматизм",d:"Результат важнее теории"},{i:"🌊",n:"Гибкость",d:"Меняешься быстрее обстоятельств"}],p:{extraversion:1.3,dominance:1.2,perceiving:1.5,openness:1.0,conscientiousness:-0.5}}
 };
 
 var DIMS=["openness","conscientiousness","extraversion","agreeableness","neuroticism","intuition","feeling","perceiving","dominance","influence","steadiness","compliance"];
-var cQ=0, ans={}, sc={};
+var cQ=0,ans={},sc={};
 
-function initSc(){sc={};DIMS.forEach(function(d){sc[d]=0;});}
-
-function showPage(toId){
-  var pages=document.querySelectorAll(".page");
-  pages.forEach(function(p){p.classList.remove("active");});
-  document.getElementById(toId).classList.add("active");
+function go(id){
+  document.querySelectorAll(".pg").forEach(function(p){p.classList.remove("on");});
+  var el=document.getElementById(id);
+  el.classList.add("on");
+  el.scrollTop=0;
   window.scrollTo(0,0);
 }
 
+function initSc(){sc={};DIMS.forEach(function(d){sc[d]=0;});}
+
 function renderQ(){
-  var q=QS[cQ], tot=QS.length;
-  document.getElementById("qFill").style.width=((cQ+1)/tot*100)+"%";
-  document.getElementById("qCnt").textContent=(cQ+1)+" / "+tot;
+  var q=QS[cQ],tot=QS.length;
+  var pct=Math.round((cQ+1)/tot*100);
+  document.getElementById("progFill").style.width=pct+"%";
+  document.getElementById("progLabel").textContent="Вопрос "+(cQ+1)+" из "+tot;
+  document.getElementById("qCnt").textContent=(cQ+1)+"/"+tot;
   document.getElementById("qDim").textContent=q.d;
   document.getElementById("qText").textContent=q.t;
   var c=document.getElementById("qOpts");
   c.innerHTML="";
-  var L=["A","B","C","D"];
-  q.o.forEach(function(o,i){
+  ["А","Б","В","Г"].forEach(function(L,i){
     var d=document.createElement("div");
     d.className="qopt"+(ans[cQ]===i?" sel":"");
-    d.innerHTML='<div class="qopt-l">'+L[i]+'</div><div class="qopt-t">'+o.t+'</div>';
+    d.innerHTML='<div class="qopt-l">'+L+'</div><div class="qopt-t">'+q.o[i].t+'</div>';
     d.addEventListener("click",function(){
       ans[cQ]=i;
-      document.querySelectorAll(".qopt").forEach(function(el,idx){
-        el.classList.toggle("sel",idx===i);
-      });
+      document.querySelectorAll(".qopt").forEach(function(el,idx){el.classList.toggle("sel",idx===i);});
       document.getElementById("btnNext").disabled=false;
     });
     c.appendChild(d);
   });
-  document.getElementById("btnNext").disabled=(ans[cQ]===undefined);
-  document.getElementById("btnNext").textContent=(cQ===QS.length-1)?"Узнать результат":"Далее";
+  var isLast=(cQ===QS.length-1);
+  var btn=document.getElementById("btnNext");
+  btn.disabled=(ans[cQ]===undefined);
+  btn.innerHTML=isLast
+    ? 'Узнать результат <svg viewBox="0 0 20 20" fill="currentColor" style="width:18px;height:18px"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>'
+    : 'Далее <svg viewBox="0 0 20 20" fill="currentColor" style="width:18px;height:18px"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>';
 }
 
 function calcResult(){
-  showPage("p-loading");
+  go("pg-loading");
   initSc();
   QS.forEach(function(q,qi){
     var a=ans[qi];
     if(a!==undefined){
-      Object.keys(q.o[a].s).forEach(function(d){
-        if(sc[d]!==undefined) sc[d]+=q.o[a].s[d];
-      });
+      var s=q.o[a].s;
+      Object.keys(s).forEach(function(d){if(sc[d]!==undefined)sc[d]+=s[d];});
     }
   });
   var steps=["ls1","ls2","ls3","ls4","ls5"];
   steps.forEach(function(id,i){
     setTimeout(function(){
       document.getElementById(id).classList.add("vis");
-      if(i>0) document.getElementById(steps[i-1]).classList.add("done");
-    },500+i*550);
+      if(i>0)document.getElementById(steps[i-1]).classList.add("done");
+    },400+i*500);
   });
   setTimeout(function(){
     document.getElementById("ls5").classList.add("done");
     var k=pickType();
     renderResult(k);
-    showPage("p-result");
+    go("pg-result");
     gtag("event","quiz_complete",{personality_type:k});
-  },3500);
+  },3200);
 }
 
 function pickType(){
   var mx=0;
   DIMS.forEach(function(d){if(Math.abs(sc[d]||0)>mx)mx=Math.abs(sc[d]||0);});
-  if(mx===0)mx=1;
-  var n={};
-  DIMS.forEach(function(d){n[d]=(sc[d]||0)/mx;});
-  var best=null, bs=-Infinity;
+  if(!mx)mx=1;
+  var n={};DIMS.forEach(function(d){n[d]=(sc[d]||0)/mx;});
+  var best=null,bs=-Infinity;
   Object.keys(AT).forEach(function(k){
     var s=0;
     Object.keys(AT[k].p).forEach(function(d){s+=(n[d]||0)*AT[k].p[d];});
@@ -368,7 +426,7 @@ function pickType(){
 function renderResult(k){
   var a=AT[k];
   document.getElementById("rName").textContent=a.n;
-  document.getElementById("rTag").textContent=a.tag.replace(/\n/g,"\n");
+  document.getElementById("rTag").textContent=a.tag;
   document.getElementById("rCodes").innerHTML=a.codes.map(function(c){return'<span class="rcode">'+c+'</span>';}).join("");
   var dsp=[
     {k:"openness",l:"Открытость"},{k:"conscientiousness",l:"Добросовестность"},
@@ -378,44 +436,35 @@ function renderResult(k){
   ];
   var mx=0;
   dsp.forEach(function(d){if(Math.abs(sc[d.k]||0)>mx)mx=Math.abs(sc[d.k]||0);});
-  if(mx===0)mx=1;
+  if(!mx)mx=1;
   document.getElementById("rScores").innerHTML=dsp.map(function(d){
     var pct=Math.round(Math.max(5,((sc[d.k]||0)+mx)/(2*mx)*100));
     return'<div class="score-row"><div class="score-name">'+d.l+'</div><div class="score-track"><div class="score-fill" style="width:0%" data-t="'+pct+'"></div></div><div class="score-pct">'+pct+'%</div></div>';
   }).join("");
-  setTimeout(function(){
-    document.querySelectorAll(".score-fill").forEach(function(b){b.style.width=b.dataset.t+"%";});
-  },100);
+  setTimeout(function(){document.querySelectorAll(".score-fill").forEach(function(b){b.style.width=b.dataset.t+"%";});},150);
   document.getElementById("rDesc").textContent=a.desc;
   document.getElementById("rTraits").innerHTML=a.traits.map(function(t){
     return'<div class="tcard"><div class="tcard-icon">'+t.i+'</div><div class="tcard-name">'+t.n+'</div><div class="tcard-desc">'+t.d+'</div></div>';
   }).join("");
-  document.getElementById("shareTitle").textContent="Мой архетип — "+a.n;
+  document.getElementById("shareTitle").textContent="Мой архетип — "+a.n+". Узнай свой!";
   document.getElementById("refLink").href="https://t.me/mira?start=ref_7030530967_"+k.toLowerCase();
 }
 
-function showToast(msg){
+function toast(msg){
   var t=document.getElementById("toast");
   t.textContent=msg;t.classList.add("show");
-  setTimeout(function(){t.classList.remove("show");},2000);
+  setTimeout(function(){t.classList.remove("show");},2200);
 }
 
-// Wire up buttons
+// ── EVENTS ──
 document.getElementById("btnStart").addEventListener("click",function(){
-  showPage("p-consent");
-  gtag("event","intro_click");
-});
-document.getElementById("btnAgree").addEventListener("click",function(){
+  go("pg-quiz");
   initSc();cQ=0;ans={};
   renderQ();
-  showPage("p-quiz");
   gtag("event","quiz_start");
 });
-document.getElementById("btnConsentBack").addEventListener("click",function(){
-  showPage("p-intro");
-});
-document.getElementById("btnQuizBack").addEventListener("click",function(){
-  if(cQ===0){showPage("p-consent");}
+document.getElementById("btnBack").addEventListener("click",function(){
+  if(cQ===0){go("pg-intro");}
   else{cQ--;renderQ();}
 });
 document.getElementById("btnNext").addEventListener("click",function(){
@@ -425,18 +474,28 @@ document.getElementById("btnNext").addEventListener("click",function(){
 });
 document.getElementById("btnShareTG").addEventListener("click",function(){
   var n=document.getElementById("rName").textContent;
-  var txt="Прошёл тест личности и оказался "+n+" 🧠\nУзнай свой архетип → https://nlbakkr-spec.github.io/personality-test/";
-  window.open("https://t.me/share/url?url=https://nlbakkr-spec.github.io/personality-test/&text="+encodeURIComponent(txt),"_blank");
+  var url="https://nlbakkr-spec.github.io/personality-test/";
+  var txt="Прошёл тест личности Nexus Type и оказался "+n+" 🧠\nУзнай свой архетип → "+url;
+  window.open("https://t.me/share/url?url="+encodeURIComponent(url)+"&text="+encodeURIComponent(txt),"_blank");
   gtag("event","share_tg");
 });
 document.getElementById("btnCopy").addEventListener("click",function(){
   var n=document.getElementById("rName").textContent;
-  navigator.clipboard.writeText("Мой психотип: "+n+" 🧠\nПройди тест → https://nlbakkr-spec.github.io/personality-test/").then(function(){showToast("Скопировано ✓");});
+  var txt="Мой психотип: "+n+" 🧠 Пройди тест → https://nlbakkr-spec.github.io/personality-test/";
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(txt).then(function(){toast("Скопировано ✓");});
+  } else {
+    var ta=document.createElement("textarea");
+    ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);
+    toast("Скопировано ✓");
+  }
   gtag("event","share_copy");
 });
 document.getElementById("btnRetry").addEventListener("click",function(){
-  showPage("p-intro");
+  go("pg-intro");
+  initSc();cQ=0;ans={};
 });
+})();
 </script>
 </body>
 </html>
