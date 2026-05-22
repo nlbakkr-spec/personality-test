@@ -1,239 +1,332 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- Google tag (gtag.js) -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS TYPE — Кто ты на самом деле?</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXEB251396"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-YXEB251396');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personality Test</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #0a0a0a; color: #fff; font-family: 'Helvetica Neue', Arial, sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .container { max-width: 500px; width: 100%; }
-        .logo { text-align: center; margin-bottom: 60px; letter-spacing: 8px; font-size: 12px; color: #666; text-transform: uppercase; }
-        .line { width: 60px; height: 1px; background: #fff; margin: 30px auto; }
-        h1 { font-size: 28px; font-weight: 300; text-align: center; margin-bottom: 20px; letter-spacing: 2px; }
-        .subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 50px; }
-        .question { display: none; }
-        .question.active { display: block; }
-        .question-text { font-size: 18px; margin-bottom: 40px; line-height: 1.6; }
-        .options { display: flex; flex-direction: column; gap: 15px; }
-        .option { padding: 20px 25px; border: 1px solid #333; cursor: pointer; transition: all 0.3s ease; font-size: 15px; }
-        .option:hover { border-color: #fff; background: #111; }
-        .progress { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); color: #333; font-size: 12px; letter-spacing: 3px; }
-        .result { display: none; text-align: center; }
-        .result.show { display: block; }
-        .result-type { font-size: 42px; font-weight: 300; margin-bottom: 10px; letter-spacing: 5px; }
-        .result-preview { color: #aaa; line-height: 1.8; margin-bottom: 30px; font-size: 15px; }
-
-        /* Locked full result block */
-        .result-locked {
-            position: relative;
-            margin-bottom: 40px;
-        }
-        .result-locked-text {
-            color: #555;
-            line-height: 1.8;
-            font-size: 14px;
-            filter: blur(4px);
-            user-select: none;
-            pointer-events: none;
-            margin-bottom: 0;
-        }
-        .result-locked-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(to bottom, transparent 0%, #0a0a0a 60%);
-        }
-
-        /* CTA button */
-        .cta-btn {
-            display: inline-block;
-            padding: 20px 40px;
-            border: 1px solid #fff;
-            color: #fff;
-            text-decoration: none;
-            font-size: 13px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-            cursor: pointer;
-        }
-        .cta-btn:hover {
-            background: #fff;
-            color: #000;
-        }
-        .cta-hint {
-            color: #444;
-            font-size: 11px;
-            letter-spacing: 2px;
-            margin-top: 15px;
-            text-transform: uppercase;
-        }
-    </style>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-YXEB251396');</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+:root{--bg:#050508;--s:#0d0d14;--s2:#13131e;--b:rgba(255,255,255,0.06);--a:#7c6aff;--a2:#ff6ab0;--a3:#6affda;--t:#f0f0ff;--m:#6b6b8a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--t);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse 60% 40% at 20% 20%,rgba(124,106,255,0.08) 0%,transparent 60%),radial-gradient(ellipse 50% 35% at 80% 80%,rgba(255,106,176,0.06) 0%,transparent 60%);pointer-events:none;z-index:0}
+.wrap{max-width:680px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+.screen{display:none}.screen.active{display:block}
+/* INTRO */
+#intro{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:60px 0}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(124,106,255,0.1);border:1px solid rgba(124,106,255,0.25);border-radius:100px;padding:6px 16px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#a89fff;margin-bottom:32px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--a);box-shadow:0 0 8px var(--a);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+h1{font-size:clamp(42px,8vw,72px);font-weight:900;line-height:1;letter-spacing:-.03em;margin-bottom:8px}
+.gt{background:linear-gradient(135deg,#fff 0%,#a89fff 50%,#ff6ab0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{font-size:clamp(14px,3vw,18px);color:var(--m);margin-bottom:48px;line-height:1.6;max-width:480px}
+.stats{display:flex;gap:32px;margin-bottom:48px;flex-wrap:wrap}
+.stat-n{font-size:24px;font-weight:800}.stat-l{font-size:12px;color:var(--m);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+.methods{display:flex;gap:12px;margin-bottom:40px;flex-wrap:wrap}
+.mtag{background:var(--s2);border:1px solid var(--b);border-radius:8px;padding:8px 14px;font-size:12px;color:var(--m)}
+.mtag b{color:var(--t)}
+.consent{background:rgba(255,200,50,0.05);border:1px solid rgba(255,200,50,0.2);border-radius:16px;padding:20px 24px;margin-bottom:32px;display:flex;gap:16px}
+.consent-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.consent-body{font-size:13px;line-height:1.6;color:#c8c8a0}
+.consent-body strong{color:#ffe066;font-size:14px;display:block;margin-bottom:6px}
+.btn-p{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#7c6aff,#a855f7);color:#fff;border:none;border-radius:14px;padding:18px 36px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 0 40px rgba(124,106,255,0.3)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(124,106,255,0.5)}
+.btn-s{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--t);border:1px solid var(--b);border-radius:14px;padding:16px 32px;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none}
+.btn-s:hover{background:var(--s2)}
+/* QUIZ */
+#quiz{padding:40px 0 80px}
+.qhdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;padding-top:20px}
+.qlogo{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--m)}
+.qcnt{font-size:13px;color:var(--m);font-weight:500}
+.pbar{height:3px;background:var(--s2);border-radius:100px;overflow:hidden;margin-bottom:48px}
+.pfill{height:100%;background:linear-gradient(90deg,var(--a),var(--a2));border-radius:100px;transition:width .5s cubic-bezier(.4,0,.2,1);box-shadow:0 0 12px rgba(124,106,255,0.6)}
+.dbadge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}
+.qtext{font-size:clamp(20px,4vw,28px);font-weight:700;line-height:1.35;letter-spacing:-.02em;margin-bottom:36px}
+.opts{display:flex;flex-direction:column;gap:12px}
+.opt{background:var(--s);border:1px solid var(--b);border-radius:16px;padding:18px 22px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:16px;text-align:left}
+.opt:hover{background:var(--s2);border-color:rgba(124,106,255,0.3);transform:translateX(4px)}
+.opt.sel{background:rgba(124,106,255,0.1);border-color:rgba(124,106,255,0.5)}
+.oltr{width:32px;height:32px;border-radius:8px;background:var(--s2);border:1px solid var(--b);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--m);flex-shrink:0;transition:all .2s}
+.opt.sel .oltr{background:var(--a);border-color:var(--a);color:#fff}
+.otxt{font-size:15px;line-height:1.45;font-weight:400}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;gap:12px}
+.btn-nav{display:flex;align-items:center;gap:8px;background:var(--s);border:1px solid var(--b);border-radius:12px;padding:14px 24px;font-size:14px;font-weight:600;color:var(--t);cursor:pointer;transition:all .2s}
+.btn-nav:hover{background:var(--s2)}
+.btn-nav:disabled{opacity:.3;cursor:not-allowed}
+.btn-nxt{background:linear-gradient(135deg,#7c6aff,#a855f7);border-color:transparent;box-shadow:0 0 20px rgba(124,106,255,0.25)}
+.btn-nxt:hover{box-shadow:0 0 30px rgba(124,106,255,0.4);transform:translateY(-1px)}
+/* LOADING */
+#loading{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 0}
+.lring{width:80px;height:80px;border-radius:50%;border:2px solid var(--s2);border-top-color:var(--a);border-right-color:var(--a2);animation:spin 1s linear infinite;margin-bottom:32px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ltitle{font-size:22px;font-weight:700;margin-bottom:12px}
+.lsub{font-size:14px;color:var(--m);margin-bottom:32px}
+.lsteps{display:flex;flex-direction:column;gap:10px;text-align:left;width:100%;max-width:320px}
+.lstep{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--m);opacity:0;transform:translateY(8px);transition:all .4s}
+.lstep.vis{opacity:1;transform:translateY(0);color:var(--t)}
+.sdot{width:8px;height:8px;border-radius:50%;background:var(--s2);border:1px solid var(--b);flex-shrink:0;transition:all .3s}
+.lstep.vis .sdot{background:var(--a);box-shadow:0 0 8px var(--a)}
+/* RESULT */
+#result{padding:40px 0 80px}
+.rhdr{text-align:center;padding:60px 0 48px}
+.reyebrow{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--m);margin-bottom:16px}
+.rname{font-size:clamp(48px,10vw,80px);font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:16px}
+.rtag{font-size:clamp(16px,3vw,22px);color:var(--m);font-weight:400;margin-bottom:32px}
+.rcodes{display:inline-flex;gap:8px;margin-bottom:48px;flex-wrap:wrap;justify-content:center}
+.cpill{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;letter-spacing:.06em}
+.card{background:var(--s);border:1px solid var(--b);border-radius:24px;padding:32px;margin-bottom:24px}
+.ctitle{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--m);margin-bottom:24px}
+.srow{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.slbl{font-size:13px;font-weight:600;width:140px;flex-shrink:0}
+.strack{flex:1;height:6px;background:var(--s2);border-radius:100px;overflow:hidden}
+.sfill{height:100%;border-radius:100px;transition:width 1s cubic-bezier(.4,0,.2,1)}
+.spct{font-size:13px;font-weight:700;width:36px;text-align:right;flex-shrink:0}
+.desc{font-size:15px;line-height:1.75;color:#c8c8e0}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.tcard{background:var(--s2);border:1px solid var(--b);border-radius:14px;padding:16px}
+.ticon{font-size:20px;margin-bottom:8px}
+.tname{font-size:13px;font-weight:700;margin-bottom:4px}
+.tdesc{font-size:12px;color:var(--m);line-height:1.4}
+.blur-gate{position:relative;margin-bottom:24px}
+.blur-c{filter:blur(12px);user-select:none;pointer-events:none}
+.gate-ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(5,5,8,0.7) 0%,rgba(5,5,8,0.4) 100%);border-radius:24px;padding:32px;text-align:center}
+.gicon{font-size:36px;margin-bottom:16px}
+.gtitle{font-size:20px;font-weight:800;margin-bottom:8px}
+.gsub{font-size:14px;color:var(--m);margin-bottom:24px;line-height:1.5}
+.share-card{background:linear-gradient(135deg,rgba(124,106,255,0.1),rgba(255,106,176,0.08));border:1px solid rgba(124,106,255,0.2);border-radius:24px;padding:32px;text-align:center;margin-bottom:24px}
+.sctitle{font-size:18px;font-weight:800;margin-bottom:8px}
+.scsub{font-size:14px;color:var(--m);margin-bottom:24px}
+.scbtns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-sh{display:flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+.btn-tg{background:rgba(41,182,246,0.15);border:1px solid rgba(41,182,246,0.3);color:#29b6f6}
+.btn-tg:hover{background:rgba(41,182,246,0.25)}
+.btn-cp{background:var(--s2);border:1px solid var(--b);color:var(--t)}
+.btn-cp:hover{background:rgba(255,255,255,0.05)}
+.mnote{background:var(--s);border:1px solid var(--b);border-radius:16px;padding:20px 24px;margin-bottom:32px;display:flex;gap:14px}
+.mnote-t{font-size:12px;color:var(--m);line-height:1.6}
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--s2);border:1px solid var(--b);border-radius:12px;padding:12px 20px;font-size:14px;font-weight:500;z-index:1000;transition:transform .3s cubic-bezier(.4,0,.2,1);white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media(max-width:480px){.tgrid{grid-template-columns:1fr}.stats{gap:20px}.slbl{width:110px;font-size:12px}}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">PERSONALITY</div>
-        <div class="line"></div>
-        <div id="start" class="question active">
-            <h1>УЗНАЙ<br>СЕБЯ</h1>
-            <p class="subtitle">7 вопросов. 2 минуты.</p>
-            <div class="options">
-                <div class="option" onclick="startTest()">НАЧАТЬ</div>
-            </div>
-        </div>
-        <div id="q1" class="question">
-            <p class="question-text">Как ты принимаешь решения?</p>
-            <div class="options">
-                <div class="option" onclick="answer(1, 'a')">Анализирую все за и против</div>
-                <div class="option" onclick="answer(1, 'b')">Доверяю интуиции</div>
-                <div class="option" onclick="answer(1, 'c')">Советуюсь с другими</div>
-                <div class="option" onclick="answer(1, 'd')">Действую быстро, потом думаю</div>
-            </div>
-        </div>
-        <div id="q2" class="question">
-            <p class="question-text">Что для тебя важнее?</p>
-            <div class="options">
-                <div class="option" onclick="answer(2, 'a')">Успех и достижения</div>
-                <div class="option" onclick="answer(2, 'b')">Свобода и независимость</div>
-                <div class="option" onclick="answer(2, 'c')">Отношения и близость</div>
-                <div class="option" onclick="answer(2, 'd')">Стабильность и порядок</div>
-            </div>
-        </div>
-        <div id="q3" class="question">
-            <p class="question-text">Как ты ведёшь себя в конфликте?</p>
-            <div class="options">
-                <div class="option" onclick="answer(3, 'a')">Ищу компромисс</div>
-                <div class="option" onclick="answer(3, 'b')">Отстаиваю свою позицию</div>
-                <div class="option" onclick="answer(3, 'c')">Избегаю конфликта</div>
-                <div class="option" onclick="answer(3, 'd')">Анализирую ситуацию</div>
-            </div>
-        </div>
-        <div id="q4" class="question">
-            <p class="question-text">Что тебя мотивирует?</p>
-            <div class="options">
-                <div class="option" onclick="answer(4, 'a')">Признание и уважение</div>
-                <div class="option" onclick="answer(4, 'b')">Новые знания и опыт</div>
-                <div class="option" onclick="answer(4, 'c')">Помощь другим</div>
-                <div class="option" onclick="answer(4, 'd')">Материальный результат</div>
-            </div>
-        </div>
-        <div id="q5" class="question">
-            <p class="question-text">Как ты относишься к правилам?</p>
-            <div class="options">
-                <div class="option" onclick="answer(5, 'a')">Следую им</div>
-                <div class="option" onclick="answer(5, 'b')">Ставлю под сомнение</div>
-                <div class="option" onclick="answer(5, 'c')">Создаю свои</div>
-                <div class="option" onclick="answer(5, 'd')">Игнорирую</div>
-            </div>
-        </div>
-        <div id="q6" class="question">
-            <p class="question-text">Твоя идеальная работа?</p>
-            <div class="options">
-                <div class="option" onclick="answer(6, 'a')">Команда и коммуникации</div>
-                <div class="option" onclick="answer(6, 'b')">Творчество и свобода</div>
-                <div class="option" onclick="answer(6, 'c')">Анализ и структура</div>
-                <div class="option" onclick="answer(6, 'd')">Помощь людям</div>
-            </div>
-        </div>
-        <div id="q7" class="question">
-            <p class="question-text">Что ты ценишь в людях?</p>
-            <div class="options">
-                <div class="option" onclick="answer(7, 'a')">Честность</div>
-                <div class="option" onclick="answer(7, 'b')">Надёжность</div>
-                <div class="option" onclick="answer(7, 'c')">Энергичность</div>
-                <div class="option" onclick="answer(7, 'd')">Ум</div>
-            </div>
-        </div>
+<div class="toast" id="toast"></div>
 
-        <div id="result" class="result">
-            <div class="line"></div>
-            <p style="color:#666; font-size:12px; letter-spacing:4px; text-transform:uppercase; margin-bottom:20px;">Анализ завершён</p>
-            <div class="result-type" style="font-size:32px; margin-bottom:15px; letter-spacing:3px;">???</div>
-            <p style="color:#555; font-size:14px; line-height:1.8; margin-bottom:10px; filter:blur(5px); user-select:none;">Стратег · Харизматик · Новатор · Лидер</p>
-            <p style="color:#444; font-size:13px; letter-spacing:2px; text-transform:uppercase; margin-bottom:35px;">Твой психотип определён</p>
+<div class="screen active" id="intro">
+<div class="wrap">
+<div class="badge"><div class="dot"></div>Nexus Type System v1.0</div>
+<h1><span class="gt">Кто ты</span><br>на самом деле?</h1>
+<p class="sub">Научный тест личности нового поколения. Объединяет Big Five, MBTI и DISC в единую систему из 8 архетипов.</p>
+<div class="stats">
+<div><div class="stat-n">24</div><div class="stat-l">вопроса</div></div>
+<div><div class="stat-n">8</div><div class="stat-l">архетипа</div></div>
+<div><div class="stat-n">~5 мин</div><div class="stat-l">времени</div></div>
+</div>
+<div class="methods">
+<div class="mtag">🔬 <b>Big Five</b> OCEAN</div>
+<div class="mtag">🧩 <b>MBTI</b> 4 оси</div>
+<div class="mtag">⚡ <b>DISC</b> поведение</div>
+</div>
+<div class="consent">
+<div class="consent-icon">🔒</div>
+<div class="consent-body">
+<strong>СОГЛАСИЕ НА ОБРАБОТКУ ДАННЫХ</strong>
+Нажимая «Начать тест», вы соглашаетесь с тем, что ваши ответы анонимно используются для расчёта психотипа. Мы не собираем личные данные. Результаты хранятся только в вашем браузере.
+</div>
+</div>
+<button class="btn-p" onclick="startQuiz()">Начать тест →</button>
+</div>
+</div>
 
-            <div class="result-locked">
-                <p id="result-locked-text" class="result-locked-text">Твой психотип раскрывает скрытые черты характера, сильные стороны и зоны роста. Полный анализ включает описание твоих уникальных талантов, мотивации и идеальных сфер реализации.</p>
-                <div class="result-locked-overlay">
-                    <a id="cta-link" href="https://t.me/mira?start=ref_7030530967" target="_blank" class="cta-btn">
-                        🔓 Узнать результат
-                    </a>
-                    <p class="cta-hint">Бесплатно · Через Telegram</p>
-                </div>
-            </div>
-        </div>
+<div class="screen" id="quiz">
+<div class="wrap">
+<div class="qhdr"><div class="qlogo">NEXUS TYPE</div><div class="qcnt" id="qCnt">1 / 24</div></div>
+<div class="pbar"><div class="pfill" id="pFill" style="width:4%"></div></div>
+<div id="dBadge" class="dbadge"></div>
+<div class="qtext" id="qText"></div>
+<div class="opts" id="opts"></div>
+<div class="qnav">
+<button class="btn-nav" id="btnBack" onclick="prevQ()" disabled>← Назад</button>
+<button class="btn-nav btn-nxt" id="btnNext" onclick="nextQ()">Далее →</button>
+</div>
+</div>
+</div>
 
-        <div class="progress" id="progress"></div>
-    </div>
-    <script>
-        const types = {
-            a: {
-                name: "СТРАТЕГ",
-                preview: "Ты мыслишь системно и видишь картину целиком. Твои решения взвешены, а цели — долгосрочные.",
-                full: "Ты редкий тип личности — Стратег. Твой мозг работает как шахматный компьютер: просчитывает ходы наперёд, находит скрытые связи и строит планы там, где другие видят хаос. Ты не торопишься с выводами — и именно поэтому почти всегда оказываешься прав. Твоя слабость — перфекционизм и сложность в делегировании. Полный разбор твоих сильных сторон, скрытых талантов и зон роста — в персональном отчёте."
-            },
-            b: {
-                name: "ХАРИЗМАТИК",
-                preview: "Ты живёшь интуицией и энергией момента. Люди тянутся к тебе — ты умеешь зажигать.",
-                full: "Харизматик — это не просто обаяние. Это особый тип восприятия мира: ты чувствуешь людей и ситуации раньше, чем успеваешь их осмыслить. Твоя интуиция — мощный инструмент, который большинство людей никогда не разовьют. Ты создаёшь атмосферу вокруг себя и двигаешь других вперёд. Полный анализ твоего психотипа, включая скрытые мотивы и идеальные сферы реализации — в персональном отчёте."
-            },
-            c: {
-                name: "НОВАТОР",
-                preview: "Ты видишь возможности там, где другие видят препятствия. Твой мозг заточен под изменения.",
-                full: "Новатор — один из самых редких психотипов. Ты не просто генерируешь идеи — ты переосмысляешь правила игры. Твоя сила в нестандартном мышлении и способности адаптироваться быстрее других. Именно такие люди создают то, чего раньше не существовало. Полный разбор твоих уникальных черт, потенциала и слепых зон — в персональном отчёте."
-            },
-            d: {
-                name: "ЛИДЕР",
-                preview: "Ты действуешь, пока другие думают. Твоя сила — в решительности и умении вести за собой.",
-                full: "Лидер по природе — это не должность, это способ существования. Ты берёшь ответственность там, где другие отступают, и двигаешься вперёд даже в условиях неопределённости. Твоя энергия заразительна, а результаты говорят сами за себя. Полный анализ твоего лидерского стиля, сильных сторон и точек роста — в персональном отчёте."
-            }
-        };
+<div class="screen" id="loading">
+<div class="wrap" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center">
+<div class="lring"></div>
+<div class="ltitle">Анализируем твою личность</div>
+<div class="lsub">Обрабатываем 24 ответа по 3 методологиям</div>
+<div class="lsteps">
+<div class="lstep" id="ls1"><div class="sdot"></div>Анализ по Big Five (OCEAN)...</div>
+<div class="lstep" id="ls2"><div class="sdot"></div>Определение MBTI-профиля...</div>
+<div class="lstep" id="ls3"><div class="sdot"></div>Расчёт DISC-поведения...</div>
+<div class="lstep" id="ls4"><div class="sdot"></div>Синтез Nexus-архетипа...</div>
+<div class="lstep" id="ls5"><div class="sdot"></div>Формирование результата...</div>
+</div>
+</div>
+</div>
 
-        let answers = {};
-        const totalQuestions = 7;
+<div class="screen" id="result">
+<div class="wrap">
+<div class="rhdr">
+<div class="reyebrow">Твой Nexus-архетип</div>
+<div class="rname gt" id="rName"></div>
+<div class="rtag" id="rTag"></div>
+<div class="rcodes" id="rCodes"></div>
+</div>
+<div class="card">
+<div class="ctitle">Профиль личности</div>
+<div id="scores"></div>
+</div>
+<div class="card">
+<div class="ctitle">О твоём архетипе</div>
+<div class="desc" id="rDesc"></div>
+<div class="tgrid" id="rTraits"></div>
+</div>
+<div class="blur-gate">
+<div class="blur-c">
+<div class="card"><div class="ctitle">Карьера и призвание</div><div class="desc">Твой архетип идеально подходит для ролей, где требуется стратегическое мышление. Лучшие пути: предпринимательство, стратегический консалтинг, продуктовый менеджмент. Ты создаёшь там, где другие только планируют.</div></div>
+<div class="card"><div class="ctitle">Отношения и коммуникация</div><div class="desc">В отношениях ты ценишь глубину над широтой. Предпочитаешь несколько близких связей большому кругу знакомых. Твой стиль общения — прямой и содержательный.</div></div>
+</div>
+<div class="gate-ov">
+<div class="gicon">🔓</div>
+<div class="gtitle">Полный анализ</div>
+<div class="gsub">Карьера, отношения, сильные стороны и зоны роста — открой в Mira AI</div>
+<a id="refLink" href="https://t.me/mira?start=ref_7030530967" class="btn-p" style="text-decoration:none">Открыть полный результат →</a>
+</div>
+</div>
+<div class="share-card">
+<div class="sctitle">Поделись результатом</div>
+<div class="scsub">Узнай психотипы своих друзей</div>
+<div class="scbtns">
+<button class="btn-sh btn-tg" onclick="shareTG()">✈️ Telegram</button>
+<button class="btn-sh btn-cp" onclick="copyLink()">🔗 Скопировать</button>
+</div>
+</div>
+<div class="mnote">
+<div style="font-size:18px;flex-shrink:0">📚</div>
+<div class="mnote-t">Nexus Type System основана на: <b>Big Five (OCEAN)</b> — Costa & McCrae, 1992; <b>MBTI</b> — Myers-Briggs Type Indicator; <b>DISC</b> — Marston, 1928. Тест носит ознакомительный характер и не является клинической диагностикой.</div>
+</div>
+<div style="text-align:center;padding-bottom:40px">
+<button class="btn-s" onclick="showScreen('intro')">↺ Пройти заново</button>
+</div>
+</div>
+</div>
 
-        function startTest() {
-            document.getElementById('start').classList.remove('active');
-            document.getElementById('q1').classList.add('active');
-            updateProgress(1);
-        }
+<script>
+const QS=[
+{d:'openness',dl:'🔭 Открытость',dc:'#7c6aff',t:'Ты читаешь статью о квантовой физике. Твоя реакция:',o:[{t:'Захватывает — сразу хочу копнуть глубже',s:{openness:4,intuition:3}},{t:'Интересно, если объяснят простыми словами',s:{openness:2,intuition:1}},{t:'Предпочту что-то более практичное',s:{openness:-1,intuition:-2}},{t:'Не моя тема, лучше займусь делом',s:{openness:-3,dominance:2}}]},
+{d:'intuition',dl:'🧩 Интуиция',dc:'#a89fff',t:'Когда ты решаешь проблему, ты чаще:',o:[{t:'Вижу паттерн сразу — потом объясняю логику',s:{intuition:4,openness:2}},{t:'Собираю факты, потом делаю вывод',s:{intuition:-2,conscientiousness:3}},{t:'Доверяю интуиции, но проверяю данными',s:{intuition:2,compliance:2}},{t:'Действую сразу — анализ по ходу',s:{dominance:3,perceiving:2}}]},
+{d:'openness',dl:'🔭 Открытость',dc:'#7c6aff',t:'Тебе предлагают переехать в другую страну на год. Ты:',o:[{t:'Уже пакую чемодан — это же приключение!',s:{openness:4,extraversion:2,perceiving:2}},{t:'Интересно, но нужно всё взвесить',s:{openness:2,conscientiousness:2}},{t:'Скорее нет — здесь мой ритм и люди',s:{steadiness:3,openness:-2}},{t:'Только если это даст карьерный рост',s:{dominance:3,conscientiousness:2}}]},
+{d:'openness',dl:'🔭 Открытость',dc:'#7c6aff',t:'Твой взгляд на правила и традиции:',o:[{t:'Правила — это стартовая точка, а не потолок',s:{openness:3,perceiving:3}},{t:'Правила существуют по причине — уважаю их',s:{conscientiousness:3,compliance:3}},{t:'Зависит от контекста — гибко подхожу',s:{openness:2,perceiving:2}},{t:'Традиции дают стабильность — ценю их',s:{steadiness:3,agreeableness:2}}]},
+{d:'conscientiousness',dl:'📋 Добросовестность',dc:'#6affda',t:'Как выглядит твоё рабочее пространство прямо сейчас?',o:[{t:'Всё по местам — хаос мешает думать',s:{conscientiousness:4,compliance:3}},{t:'Организованный хаос — я знаю где что',s:{conscientiousness:1,perceiving:2}},{t:'Честно — беспорядок, но это не мешает',s:{conscientiousness:-2,perceiving:3}},{t:'Зависит от проекта — адаптируюсь',s:{conscientiousness:2,openness:1}}]},
+{d:'conscientiousness',dl:'📋 Добросовестность',dc:'#6affda',t:'Дедлайн через 3 дня. Ты:',o:[{t:'Уже сделал — я всегда заканчиваю заранее',s:{conscientiousness:4,compliance:2}},{t:'Работаю по плану, всё под контролем',s:{conscientiousness:3,dominance:1}},{t:'Лучше работаю под давлением — сделаю в срок',s:{conscientiousness:0,perceiving:3}},{t:'Дедлайн — это ориентир, не приговор',s:{conscientiousness:-2,perceiving:4}}]},
+{d:'compliance',dl:'🎯 Точность',dc:'#a89fff',t:'Ты принимаешь важное решение. Твой процесс:',o:[{t:'Собираю максимум данных, анализирую риски',s:{compliance:4,conscientiousness:3}},{t:'Советуюсь с людьми которым доверяю',s:{agreeableness:3,feeling:3}},{t:'Доверяю интуиции — она редко подводит',s:{intuition:3,perceiving:2}},{t:'Решаю быстро — промедление хуже ошибки',s:{dominance:4,perceiving:1}}]},
+{d:'conscientiousness',dl:'📋 Добросовестность',dc:'#6affda',t:'Ты берёшься за новый проект. Первый шаг:',o:[{t:'Составляю детальный план с этапами',s:{conscientiousness:4,compliance:3}},{t:'Определяю главную цель и иду к ней',s:{dominance:3,conscientiousness:2}},{t:'Собираю команду — вместе быстрее',s:{influence:3,agreeableness:2}},{t:'Начинаю делать — план появится в процессе',s:{perceiving:4,openness:2}}]},
+{d:'extraversion',dl:'🎉 Экстраверсия',dc:'#ff6ab0',t:'После насыщенного дня общения ты чувствуешь себя:',o:[{t:'Заряженным — люди дают мне энергию',s:{extraversion:4,influence:3}},{t:'Нормально — зависит от людей',s:{extraversion:1,agreeableness:2}},{t:'Немного уставшим — нужно побыть одному',s:{extraversion:-2,steadiness:2}},{t:'Истощённым — мне нужна тишина',s:{extraversion:-4,compliance:2}}]},
+{d:'influence',dl:'✨ Влияние',dc:'#ffd166',t:'На вечеринке с незнакомыми людьми ты:',o:[{t:'В центре — знакомлюсь со всеми',s:{extraversion:4,influence:4}},{t:'Нахожу интересных людей и общаюсь глубоко',s:{extraversion:1,openness:2}},{t:'Держусь рядом с теми кого знаю',s:{steadiness:3,extraversion:-1}},{t:'Предпочту не идти — не моё',s:{extraversion:-3,compliance:2}}]},
+{d:'extraversion',dl:'🎉 Экстраверсия',dc:'#ff6ab0',t:'Тебя просят выступить перед 100 людьми. Ты:',o:[{t:'С удовольствием — обожаю публичные выступления',s:{extraversion:4,influence:4,dominance:2}},{t:'Готов, если хорошо подготовлюсь',s:{conscientiousness:3,extraversion:1}},{t:'Нервничаю, но справлюсь',s:{neuroticism:2,conscientiousness:2}},{t:'Лучше письменно — так точнее выражу мысль',s:{extraversion:-3,compliance:3}}]},
+{d:'influence',dl:'✨ Влияние',dc:'#ffd166',t:'Как ты обычно убеждаешь людей?',o:[{t:'Энтузиазмом и личным примером',s:{influence:4,extraversion:3}},{t:'Логикой и фактами',s:{compliance:3,dominance:2}},{t:'Нахожу общий язык, понимаю их позицию',s:{agreeableness:4,feeling:3}},{t:'Показываю конкретный результат',s:{dominance:3,conscientiousness:2}}]},
+{d:'agreeableness',dl:'🤝 Доброжелательность',dc:'#ffd166',t:'Коллега сделал ошибку, которая повлияла на твою работу. Ты:',o:[{t:'Поговорю мягко — важно сохранить отношения',s:{agreeableness:4,feeling:3}},{t:'Скажу прямо что произошло и как исправить',s:{dominance:3,conscientiousness:2}},{t:'Разберусь сам — не хочу конфликта',s:{agreeableness:2,steadiness:3}},{t:'Проанализирую причину и предложу систему',s:{compliance:4,conscientiousness:3}}]},
+{d:'feeling',dl:'💜 Этика vs Логика',dc:'#ff9eb5',t:'При принятии решений ты больше опираешься на:',o:[{t:'Ценности и влияние на людей',s:{feeling:4,agreeableness:3}},{t:'Логику и объективный анализ',s:{feeling:-3,compliance:3}},{t:'Интуицию — она учитывает всё сразу',s:{intuition:3,feeling:1}},{t:'Результат — что даст лучший исход',s:{dominance:3,feeling:-1}}]},
+{d:'agreeableness',dl:'🤝 Доброжелательность',dc:'#ffd166',t:'Друг просит помощи, но у тебя много своих дел. Ты:',o:[{t:'Помогу — его проблема важнее моих задач',s:{agreeableness:4,feeling:3}},{t:'Помогу, но обозначу свои границы',s:{agreeableness:2,conscientiousness:2}},{t:'Объясню что занят, предложу другое время',s:{conscientiousness:3,dominance:1}},{t:'Откажу — у меня свои приоритеты',s:{dominance:2,agreeableness:-3}}]},
+{d:'steadiness',dl:'🌿 Стабильность',dc:'#6affda',t:'Что для тебя важнее в работе?',o:[{t:'Гармония в команде и комфортная атмосфера',s:{steadiness:4,agreeableness:3}},{t:'Достижение амбициозных целей',s:{dominance:4,conscientiousness:2}},{t:'Творческая свобода и новые идеи',s:{openness:4,perceiving:2}},{t:'Точность, качество и правильный процесс',s:{compliance:4,conscientiousness:3}}]},
+{d:'neuroticism',dl:'🌩️ Эмоц. устойчивость',dc:'#ff6b6b',t:'Ты узнал что важный проект провалился. Твоя первая реакция:',o:[{t:'Анализирую что пошло не так и как исправить',s:{neuroticism:-2,conscientiousness:3}},{t:'Расстраиваюсь, но быстро нахожу новый путь',s:{neuroticism:1,openness:2}},{t:'Сильно переживаю — долго не могу отпустить',s:{neuroticism:4,feeling:2}},{t:'Принимаю как данность и двигаюсь дальше',s:{neuroticism:-3,dominance:2}}]},
+{d:'neuroticism',dl:'🌩️ Эмоц. устойчивость',dc:'#ff6b6b',t:'Как ты справляешься со стрессом?',o:[{t:'Спорт, медитация — у меня есть система',s:{neuroticism:-3,conscientiousness:3}},{t:'Общение с близкими помогает',s:{agreeableness:3,extraversion:2}},{t:'Погружаюсь в работу — отвлекает',s:{conscientiousness:2,neuroticism:1}},{t:'Стресс накапливается — сложно справляться',s:{neuroticism:4,steadiness:-1}}]},
+{d:'neuroticism',dl:'🌩️ Эмоц. устойчивость',dc:'#ff6b6b',t:'Тебя критикуют публично. Ты:',o:[{t:'Воспринимаю как обратную связь — полезно',s:{neuroticism:-3,openness:3}},{t:'Неприятно, но стараюсь не показывать',s:{neuroticism:2,conscientiousness:2}},{t:'Задевает — долго думаю об этом',s:{neuroticism:4,feeling:2}},{t:'Отвечаю сразу и защищаю свою позицию',s:{dominance:3,neuroticism:1}}]},
+{d:'steadiness',dl:'🌿 Стабильность',dc:'#6affda',t:'Твоё отношение к переменам:',o:[{t:'Обожаю — перемены это рост',s:{openness:4,perceiving:3,steadiness:-2}},{t:'Принимаю если понимаю зачем',s:{conscientiousness:2,compliance:2}},{t:'Предпочитаю стабильность — она даёт силу',s:{steadiness:4,conscientiousness:2}},{t:'Зависит — оцениваю каждый случай',s:{compliance:3,openness:1}}]},
+{d:'dominance',dl:'⚡ Доминирование',dc:'#ff6b6b',t:'В групповом проекте ты обычно:',o:[{t:'Беру инициативу и веду команду',s:{dominance:4,extraversion:2}},{t:'Предлагаю идеи и вдохновляю других',s:{influence:4,openness:2}},{t:'Надёжно выполняю свою часть',s:{steadiness:4,conscientiousness:2}},{t:'Слежу за качеством и точностью',s:{compliance:4,conscientiousness:3}}]},
+{d:'dominance',dl:'⚡ Доминирование',dc:'#ff6b6b',t:'Твоя главная движущая сила:',o:[{t:'Победа и достижение результата',s:{dominance:4,conscientiousness:2}},{t:'Признание и влияние на людей',s:{influence:4,extraversion:2}},{t:'Безопасность и стабильность',s:{steadiness:4,neuroticism:-1}},{t:'Правильность и высокие стандарты',s:{compliance:4,conscientiousness:3}}]},
+{d:'perceiving',dl:'🌊 Гибкость vs Структура',dc:'#80ffdb',t:'Идеальный выходной для тебя:',o:[{t:'Спонтанно — куда глаза глядят',s:{perceiving:4,openness:3,extraversion:1}},{t:'Запланированный, но с пространством для неожиданного',s:{perceiving:2,conscientiousness:1}},{t:'Чёткий план — так отдыхаю лучше',s:{conscientiousness:3,perceiving:-2}},{t:'Дома, в тишине, с книгой или проектом',s:{extraversion:-2,compliance:2,openness:2}}]},
+{d:'perceiving',dl:'🌊 Гибкость vs Структура',dc:'#80ffdb',t:'Как ты относишься к незавершённым делам?',o:[{t:'Не могу успокоиться пока не закончу',s:{conscientiousness:4,perceiving:-3}},{t:'Стараюсь завершать, но могу отложить',s:{conscientiousness:2,perceiving:1}},{t:'Нормально — вернусь когда будет время',s:{perceiving:3,openness:1}},{t:'Параллельно веду много дел — так интереснее',s:{perceiving:4,openness:3}}]}
+];
 
-        function answer(q, a) {
-            answers[q] = a;
-            document.getElementById('q' + q).classList.remove('active');
-            if (q < totalQuestions) {
-                document.getElementById('q' + (q + 1)).classList.add('active');
-                updateProgress(q + 1);
-            } else {
-                showResult();
-            }
-        }
+const AT={
+ARCHITECT:{n:'АРХИТЕКТОР',tag:'Строишь системы, которые работают без тебя',g:'linear-gradient(135deg,#7c6aff,#a855f7)',codes:[{l:'INTJ',bg:'rgba(124,106,255,0.2)',c:'#a89fff'},{l:'Big Five: C+O',bg:'rgba(106,255,218,0.15)',c:'#6affda'},{l:'DISC: C',bg:'rgba(168,159,255,0.15)',c:'#c8bfff'}],desc:'Ты видишь структуру там, где другие видят хаос. Твой разум работает как архитектурное бюро — каждая идея проходит через фильтр системного мышления. Ты не просто решаешь проблемы, ты создаёшь системы, которые предотвращают их появление.',traits:[{i:'🏗️',n:'Системное мышление',d:'Видишь связи и паттерны'},{i:'🎯',n:'Стратегический фокус',d:'Думаешь на несколько шагов вперёд'},{i:'📐',n:'Высокие стандарты',d:'Не принимаешь "достаточно хорошо"'},{i:'🔍',n:'Аналитическая точность',d:'Детали имеют значение'}],p:{conscientiousness:1.5,openness:1.2,extraversion:-0.5,compliance:1.5,neuroticism:-1.0}},
+CATALYST:{n:'КАТАЛИЗАТОР',tag:'Зажигаешь других и двигаешь мир вперёд',g:'linear-gradient(135deg,#ff6ab0,#ff9a3c)',codes:[{l:'ENFJ',bg:'rgba(255,106,176,0.2)',c:'#ff9eb5'},{l:'Big Five: E+A',bg:'rgba(255,209,102,0.15)',c:'#ffd166'},{l:'DISC: I',bg:'rgba(255,154,60,0.15)',c:'#ffb380'}],desc:'Ты — живой двигатель перемен. Твоя суперсила — видеть потенциал в людях и помогать им его раскрыть. Высокая экстраверсия и доброжелательность создают магнетизм, который притягивает людей.',traits:[{i:'⚡',n:'Харизма',d:'Заряжаешь энергией всех вокруг'},{i:'👥',n:'Эмпатия',d:'Чувствуешь людей на глубоком уровне'},{i:'🌟',n:'Вдохновение',d:'Помогаешь другим расти'},{i:'🎭',n:'Влияние',d:'Меняешь мнения через эмоции'}],p:{extraversion:1.5,agreeableness:1.2,influence:1.5,feeling:1.0,neuroticism:-0.5}},
+PIONEER:{n:'ПИОНЕР',tag:'Исследуешь неизведанное и создаёшь новое',g:'linear-gradient(135deg,#6affda,#3a86ff)',codes:[{l:'ENTP',bg:'rgba(106,255,218,0.2)',c:'#6affda'},{l:'Big Five: O+E',bg:'rgba(58,134,255,0.15)',c:'#80b3ff'},{l:'DISC: D+I',bg:'rgba(106,255,218,0.15)',c:'#80ffdb'}],desc:'Ты живёшь на переднем крае возможного. Твой мозг постоянно генерирует идеи — иногда быстрее, чем ты успеваешь их реализовать. Ты не боишься ошибок — для тебя это просто данные для следующей итерации.',traits:[{i:'🚀',n:'Инновационность',d:'Видишь возможности там где другие — стены'},{i:'🧪',n:'Экспериментальность',d:'Пробуешь, ошибаешься, улучшаешь'},{i:'💡',n:'Генерация идей',d:'Поток идей не останавливается'},{i:'🌍',n:'Широкий кругозор',d:'Связываешь несвязанное'}],p:{openness:1.5,extraversion:1.0,dominance:1.0,influence:1.0,perceiving:1.2}},
+GUARDIAN:{n:'ХРАНИТЕЛЬ',tag:'Держишь мир вместе когда всё рушится',g:'linear-gradient(135deg,#ffd166,#06d6a0)',codes:[{l:'ISFJ',bg:'rgba(255,209,102,0.2)',c:'#ffd166'},{l:'Big Five: A+C',bg:'rgba(6,214,160,0.15)',c:'#06d6a0'},{l:'DISC: S',bg:'rgba(255,209,102,0.15)',c:'#ffe599'}],desc:'Ты — тихая сила, на которой держится всё. Пока другие генерируют идеи, ты обеспечиваешь то, что всё реально работает. Люди чувствуют себя в безопасности рядом с тобой.',traits:[{i:'🛡️',n:'Надёжность',d:'На тебя всегда можно положиться'},{i:'🌿',n:'Стабильность',d:'Якорь в шторм для всей команды'},{i:'💚',n:'Забота',d:'Замечаешь нужды других раньше них'},{i:'🤝',n:'Преданность',d:'Верен своим людям и ценностям'}],p:{agreeableness:1.5,steadiness:1.5,conscientiousness:1.0,neuroticism:-0.5,dominance:-0.5}},
+COMMANDER:{n:'КОМАНДИР',tag:'Ведёшь к победе даже когда путь неизвестен',g:'linear-gradient(135deg,#ff6b6b,#ee0979)',codes:[{l:'ENTJ',bg:'rgba(255,107,107,0.2)',c:'#ff9999'},{l:'Big Five: E+C',bg:'rgba(238,9,121,0.15)',c:'#ff80c0'},{l:'DISC: D',bg:'rgba(255,107,107,0.15)',c:'#ffb3b3'}],desc:'Ты рождён вести. Высокое доминирование и экстраверсия создают природного лидера, который не ждёт разрешения — он берёт инициативу. Твоя прямолинейность позволяет двигаться быстро там, где другие застревают в обсуждениях.',traits:[{i:'👑',n:'Лидерство',d:'Естественно берёшь командование'},{i:'⚡',n:'Решительность',d:'Действуешь быстро и уверенно'},{i:'🎯',n:'Целеориентированность',d:'Фокус на результате, не процессе'},{i:'💪',n:'Сила воли',d:'Не останавливаешься перед препятствиями'}],p:{dominance:1.8,extraversion:1.2,conscientiousness:1.0,agreeableness:-0.5,neuroticism:-1.0}},
+SAGE:{n:'МУДРЕЦ',tag:'Понимаешь глубже — видишь дальше',g:'linear-gradient(135deg,#a89fff,#6c63ff)',codes:[{l:'INTP',bg:'rgba(168,159,255,0.2)',c:'#c8bfff'},{l:'Big Five: O+C',bg:'rgba(108,99,255,0.15)',c:'#a89fff'},{l:'DISC: C',bg:'rgba(168,159,255,0.15)',c:'#d4cfff'}],desc:'Ты — мыслитель. Твой разум работает на глубине, недоступной большинству. Высокая открытость в сочетании с интровертностью создаёт уникальный тип: ты поглощаешь информацию из всех источников и синтезируешь её в оригинальные идеи.',traits:[{i:'🧠',n:'Глубокое мышление',d:'Идёшь туда куда другие не заходят'},{i:'📚',n:'Жажда знаний',d:'Учишься постоянно и с удовольствием'},{i:'🔭',n:'Концептуальность',d:'Видишь большую картину'},{i:'⚖️',n:'Объективность',d:'Анализируешь без эмоций'}],p:{openness:1.5,compliance:1.2,extraversion:-1.0,intuition:1.5,feeling:-0.5}},
+EMPATH:{n:'ЭМПАТ',tag:'Чувствуешь то что другие не замечают',g:'linear-gradient(135deg,#ff9eb5,#c77dff)',codes:[{l:'INFJ',bg:'rgba(255,158,181,0.2)',c:'#ffb3c6'},{l:'Big Five: A+O',bg:'rgba(199,125,255,0.15)',c:'#d4a0ff'},{l:'DISC: S+I',bg:'rgba(255,158,181,0.15)',c:'#ffc8d8'}],desc:'Ты воспринимаешь мир через призму человеческих связей. Твоя интуиция в отношении людей граничит со сверхспособностью — ты чувствуешь настроение комнаты, видишь невысказанное, понимаешь мотивы.',traits:[{i:'💜',n:'Эмпатия',d:'Чувствуешь других как себя'},{i:'🌙',n:'Интуиция',d:'Знаешь без объяснений'},{i:'🎨',n:'Творчество',d:'Выражаешь глубину через творчество'},{i:'🌱',n:'Рост других',d:'Помогаешь людям становиться лучше'}],p:{agreeableness:1.5,feeling:1.5,openness:1.0,intuition:1.2,extraversion:-0.3}},
+MAVERICK:{n:'МЭВЕРИК',tag:'Играешь по своим правилам — и выигрываешь',g:'linear-gradient(135deg,#80ffdb,#f7971e)',codes:[{l:'ESTP',bg:'rgba(128,255,219,0.2)',c:'#80ffdb'},{l:'Big Five: E+O',bg:'rgba(247,151,30,0.15)',c:'#ffb347'},{l:'DISC: D+I',bg:'rgba(128,255,219,0.15)',c:'#a0ffe8'}],desc:'Ты живёшь в настоящем моменте и делаешь это лучше всех. Высокая экстраверсия, открытость и доминирование создают человека, который не просто адаптируется к ситуации — он её создаёт.',traits:[{i:'🎲',n:'Адаптивность',d:'Лучший в любой ситуации'},{i:'🔥',n:'Энергия',d:'Заряжаешь всё вокруг'},{i:'🎯',n:'Прагматизм',d:'Результат важнее теории'},{i:'🌊',n:'Гибкость',d:'Меняешься быстрее обстоятельств'}],p:{extraversion:1.3,dominance:1.2,perceiving:1.5,openness:1.0,conscientiousness:-0.5}}
+};
 
-        function updateProgress(num) {
-            document.getElementById('progress').textContent = num + '/' + totalQuestions;
-        }
+const DIMS=['openness','conscientiousness','extraversion','agreeableness','neuroticism','intuition','feeling','perceiving','dominance','influence','steadiness','compliance'];
+let cQ=0,ans={},sc={};
 
-        function showResult() {
-            const counts = {a: 0, b: 0, c: 0, d: 0};
-            Object.values(answers).forEach(a => counts[a]++);
-            const top = Object.entries(counts).sort((x, y) => y[1] - x[1])[0][0];
+function initSc(){sc={};DIMS.forEach(d=>sc[d]=0)}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
+function startQuiz(){initSc();cQ=0;ans={};renderQ();showScreen('quiz');gtag('event','quiz_start')}
 
-            document.getElementById('progress').style.display = 'none';
-            document.getElementById('result').classList.add('show');
-        }
-    </script>
+function renderQ(){
+const q=QS[cQ],tot=QS.length;
+document.getElementById('qCnt').textContent=`${cQ+1} / ${tot}`;
+document.getElementById('pFill').style.width=`${((cQ+1)/tot)*100}%`;
+const b=document.getElementById('dBadge');
+b.textContent=q.dl;b.style.background=q.dc+'18';b.style.border=`1px solid ${q.dc}40`;b.style.color=q.dc;
+document.getElementById('qText').textContent=q.t;
+const c=document.getElementById('opts');c.innerHTML='';
+const L=['A','B','C','D'];
+q.o.forEach((o,i)=>{
+const d=document.createElement('div');
+d.className='opt'+(ans[cQ]===i?' sel':'');
+d.innerHTML=`<div class="oltr">${L[i]}</div><div class="otxt">${o.t}</div>`;
+d.onclick=()=>selOpt(i);c.appendChild(d)});
+document.getElementById('btnBack').disabled=cQ===0;
+document.getElementById('btnNext').textContent=cQ===QS.length-1?'Узнать результат →':'Далее →'}
+
+function selOpt(i){ans[cQ]=i;document.querySelectorAll('.opt').forEach((el,idx)=>el.classList.toggle('sel',idx===i))}
+function nextQ(){if(ans[cQ]===undefined){showToast('Выбери один из вариантов');return}if(cQ<QS.length-1){cQ++;renderQ()}else{calcResult()}}
+function prevQ(){if(cQ>0){cQ--;renderQ()}}
+
+function calcResult(){
+showScreen('loading');initSc();
+QS.forEach((q,qi)=>{const a=ans[qi];if(a!==undefined)Object.entries(q.o[a].s).forEach(([d,v])=>{if(sc[d]!==undefined)sc[d]+=v})});
+['ls1','ls2','ls3','ls4','ls5'].forEach((id,i)=>setTimeout(()=>document.getElementById(id).classList.add('vis'),400+i*500));
+setTimeout(()=>{const k=pickType();renderResult(k);showScreen('result');gtag('event','quiz_complete',{personality_type:k})},3200)}
+
+function pickType(){
+const mx=Math.max(...DIMS.map(d=>Math.abs(sc[d]||0)),1);
+const n={};DIMS.forEach(d=>n[d]=(sc[d]||0)/mx);
+let best=null,bs=-Infinity;
+Object.entries(AT).forEach(([k,a])=>{let s=0;Object.entries(a.p).forEach(([d,w])=>s+=(n[d]||0)*w);if(s>bs){bs=s;best=k}});
+return best||'PIONEER'}
+
+function renderResult(k){
+const a=AT[k];
+document.getElementById('rName').textContent=a.n;
+document.getElementById('rTag').textContent=a.tag;
+document.getElementById('rCodes').innerHTML=a.codes.map(c=>`<span class="cpill" style="background:${c.bg};color:${c.c}">${c.l}</span>`).join('');
+const dsp=[
+{k:'openness',l:'Открытость',c:'#7c6aff'},{k:'conscientiousness',l:'Добросовестность',c:'#6affda'},
+{k:'extraversion',l:'Экстраверсия',c:'#ff6ab0'},{k:'agreeableness',l:'Доброжелательность',c:'#ffd166'},
+{k:'dominance',l:'Доминирование',c:'#ff6b6b'},{k:'influence',l:'Влияние',c:'#ffb347'},
+{k:'steadiness',l:'Стабильность',c:'#06d6a0'},{k:'compliance',l:'Точность',c:'#a89fff'}];
+const mx=Math.max(...dsp.map(d=>Math.abs(sc[d.k]||0)),1);
+document.getElementById('scores').innerHTML=dsp.map(d=>{
+const pct=Math.round(Math.max(5,((sc[d.k]||0)+mx)/(2*mx)*100));
+return`<div class="srow"><div class="slbl">${d.l}</div><div class="strack"><div class="sfill" style="width:0%;background:${d.c}" data-t="${pct}"></div></div><div class="spct">${pct}%</div></div>`}).join('');
+setTimeout(()=>document.querySelectorAll('.sfill').forEach(b=>b.style.width=b.dataset.t+'%'),100);
+document.getElementById('rDesc').textContent=a.desc;
+document.getElementById('rTraits').innerHTML=a.traits.map(t=>`<div class="tcard"><div class="ticon">${t.i}</div><div class="tname">${t.n}</div><div class="tdesc">${t.d}</div></div>`).join('');
+document.getElementById('refLink').href=`https://t.me/mira?start=ref_7030530967_${k.toLowerCase()}`}
+
+function shareTG(){
+const n=document.getElementById('rName').textContent;
+const txt=`Прошёл тест личности Nexus Type и оказался ${n}! 🧠\nУзнай свой архетип → https://nlbakkr-spec.github.io/personality-test/`;
+window.open(`https://t.me/share/url?url=https://nlbakkr-spec.github.io/personality-test/&text=${encodeURIComponent(txt)}`,'_blank');
+gtag('event','share_tg')}
+
+function copyLink(){
+const n=document.getElementById('rName').textContent;
+navigator.clipboard.writeText(`Мой психотип: ${n} 🧠\nПройди тест → https://nlbakkr-spec.github.io/personality-test/`).then(()=>showToast('Скопировано! ✓'));
+gtag('event','share_copy')}
+
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+</script>
 </body>
 </html>
